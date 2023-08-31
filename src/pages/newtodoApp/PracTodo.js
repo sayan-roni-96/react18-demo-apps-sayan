@@ -1,116 +1,72 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+//import './App.css';
 
-const PracTodo = () => {
-  // const [data, callback] = useState(type);
-  const [allTodos, setAllTodos] = useState([]);
-  const [todoData, setTodoData] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
+function PracTodo() {
+  const [todos, setTodos] = useState([]);
+  const [errorMsg, setErrorMsg] = useState('')
+  const [newTodo, setNewTodo] = useState('');
 
-  console.log('todoData->', typeof todoData, todoData);
-
-  const onButtonClick = () => {
-    // console.log('onButtonClick');
-    if (!todoData || todoData === '') {
+  const addTodo = () => {
+    if (newTodo !== '') {
+      const newPracTodo = {
+        todoData:newTodo, 
+      }
+      console.log('newPracTodo->',newPracTodo)
+      setTodos([...todos,newPracTodo]);
+      setNewTodo('');
+    }else{
       setErrorMsg('Please fill the field!');
       setTimeout(() => {
         setErrorMsg('');
       }, 1000);
-    } else {
-      const newTodos = {
-        todo: todoData,
-      };
-      setAllTodos([...allTodos, newTodos]);
-      setTodoData('');
     }
   };
-
-  console.log('allTodos->', allTodos);
-
+console.log('todos->',todos)
   return (
-    <>
-      <div className="container">
-        <h1 style={{ color: 'red' }}>Todo App</h1>
-        <div style={{ marginBottom: '20px' }}>
-          <input
-            type="text"
-            name="todotxt"
-            id="todotxt"
-            value={todoData}
-            className="form-control"
-            style={{ width: '20%', padding: '6px', fontSize: '20px' }}
-            onChange={(evt) => setTodoData(evt.target.value)}
-          />
-          &nbsp;
-          <button
-            style={{
-              fontSize: '25px',
-              backgroundColor: 'green',
-              color: 'white',
-            }}
-            type="buttom"
-            onClick={onButtonClick}
-          >
+    <div className="container mt-5">
+
+      <div className="row justify-content-center">
+      <div className="col-sm-4">
+
+      <h1 className="mb-4">Todo List</h1>
+      <div className="input-group mb-3">
+        <input
+        style = {{width: "20%"}}
+          type="text"
+          className="form-control"
+          placeholder="Enter a new todo"
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+        />
+        <div className="input-group-append">
+          <button className="btn btn-primary" type="button" onClick={addTodo}>
             Add
           </button>
         </div>
-        <div>
+      </div>
+      <div>
           <p style={{ color: 'red', fontSize: '16px' }}>{errorMsg}</p>
         </div>
-        <div>
-          <table style={{ margin: '0 auto', width: '30%' }}>
-            <thead>
-              <th>Sl.No</th>
-              <th>Todo Name</th>
-              <th>Action</th>
-            </thead>
-            {allTodos &&
-              allTodos.map((eTodo, index) => {
-                console.log('eTodo->', eTodo);
-                return (
-                  <tbody>
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{eTodo.todo}</td>
-                      <td>
-                        <button
-                          style={{
-                            backgroundColor: 'blue',
-                            color: '#fff',
-                            fontSize: '18px',
-                          }}
-                        >
-                          View
-                        </button>
-                        &nbsp;
-                        <button
-                          style={{
-                            backgroundColor: 'yellow',
-                            color: '#000',
-                            fontSize: '18px',
-                          }}
-                        >
-                          Edit
-                        </button>
-                        &nbsp;
-                        <button
-                          style={{
-                            backgroundColor: 'red',
-                            color: '#fff',
-                            fontSize: '18px',
-                          }}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                );
-              })}
-          </table>
-        </div>
+      {<div className="lists">
+        {todos.map((todo, index) => (
+          <Fragment Key = {index}>
+          <div className='list-flex'>{index + 1}</div>
+          <div className='list-flex'>
+            {todo.todoData}
+          </div>
+          </Fragment>
+        ))}
+      </div>}
+
+        
+
       </div>
-    </>
+      </div>
+
+      
+    </div>
   );
-};
+}
 
 export default PracTodo;
