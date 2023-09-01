@@ -1,0 +1,9 @@
+.view_div {
+  border: 1px solid #000;
+  width: 100%;
+  margin: auto 0px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 14px 3px;
+}
