@@ -10,7 +10,6 @@ const MainTodo = () => {
   const [viewTodoData, setViewTodoData] = useState();
 
   const onButtonClick = () => {
-    console.log('onButtonClick');
     if (subject === '' || description === '') {
       setErrorMsg('Please fill the field!');
       setTimeout(() => {
@@ -18,6 +17,7 @@ const MainTodo = () => {
       }, 1000);
     } else {
       const newTodos = {
+        todoId: Date.now(),
         todoSubject: subject,
         todoDescription: description,
       };
@@ -34,7 +34,7 @@ const MainTodo = () => {
   console.log('allTodos->', allTodos);
 
   const viewClick = (ViewData) => {
-    console.log('ViewData->', ViewData);
+    // console.log('ViewData->', ViewData);
     setViewTodoData(ViewData);
 
     setTimeout(() => {
@@ -42,7 +42,19 @@ const MainTodo = () => {
     }, 2000);
   };
 
-  console.log('viewTodoData->', viewTodoData);
+  const deleteClick = (dId) => {
+    console.log('dId->', dId);
+    if (window.confirm('Do you want to delete?')) {
+      const removeTodo = [...allTodos].filter((fData, indx) => {
+        console.log('deleteClick-Data->', fData);
+        console.log('deleteClick-Indx->', fData.todoId !== dId);
+        return fData.todoId !== dId;
+      });
+      setAllTodos(removeTodo);
+    }
+  };
+
+  // console.log('viewTodoData->', viewTodoData);
 
   return (
     <>
@@ -155,6 +167,7 @@ const MainTodo = () => {
                               color: '#fff',
                               fontSize: '18px',
                             }}
+                            onClick={() => deleteClick(eTodo.todoId)}
                           >
                             Delete
                           </button>
