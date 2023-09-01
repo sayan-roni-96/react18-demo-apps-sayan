@@ -32,14 +32,14 @@ console.log('todos->',todos)
       <h1 className="mb-4">Todo List</h1>
       <div className="input-group mb-3">
         <input
-        style = {{width: "20%"}}
+        style = {{width: "20%" , marginleft: '24px'}}
           type="text"
           className="form-control"
           placeholder="Enter a new todo"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
         />
-        <div className="input-group-append">
+        <div className="input-group-append ml-2">
           <button className="btn btn-primary" type="button" onClick={addTodo}>
             Add
           </button>
@@ -51,7 +51,7 @@ console.log('todos->',todos)
       {<div className="lists">
         {todos.map((todo, index) => (
           <Fragment Key = {index}>
-          <div className='list-flex'>{index + 1}</div>
+          <div className='list-flex'>{index + 1}.</div>
           <div className='list-flex'>
             {todo.todoData}
           </div>

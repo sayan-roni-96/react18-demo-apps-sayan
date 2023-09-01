@@ -39,11 +39,15 @@
 
 .list-flex {
   flex: 1;
-  flex-basis: 26%;
+  flex-basis: 43%;
 }
 
+
 .lists{
-display: flex;
-flex-wrap: wrap;
-column-gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  grid-column-gap: 10px;
+  column-gap: 10px;
+  justify-content: start;
+  row-gap: 20px;
 }
