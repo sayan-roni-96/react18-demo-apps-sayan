@@ -30,14 +30,17 @@ const MainTodo = () => {
     <>
       <div className="container">
         <h1 style={{ color: 'red' }}>Todo App</h1>
-        <div style={{ marginBottom: '20px' }}>
+        <div
+          className="row"
+          style={{ marginBottom: '20px', justifyContent: 'center' }}
+        >
           <input
             type="text"
             name="todotxt"
             id="todotxt"
             value={todoData}
             className="form-control"
-            style={{ width: '20%', padding: '6px', fontSize: '20px' }}
+            style={{ width: '40%', padding: '6px', fontSize: '20px' }}
             onChange={(evt) => setTodoData(evt.target.value)}
           />
           &nbsp;
@@ -46,6 +49,7 @@ const MainTodo = () => {
               fontSize: '25px',
               backgroundColor: 'green',
               color: 'white',
+              width: '20%',
             }}
             type="buttom"
             onClick={onButtonClick}
@@ -57,56 +61,63 @@ const MainTodo = () => {
           <p style={{ color: 'red', fontSize: '16px' }}>{errorMsg}</p>
         </div>
         <div>
-          <table style={{ margin: '0 auto', width: '30%' }}>
-            <thead>
-              <th>Sl.No</th>
-              <th>Todo Nme</th>
-              <th>Action</th>
-            </thead>
-            {allTodos &&
-              allTodos.map((eTodo, index) => {
-                console.log('eTodo->', eTodo);
-                return (
-                  <tbody>
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{eTodo.todo}</td>
-                      <td>
-                        <button
-                          style={{
-                            backgroundColor: 'blue',
-                            color: '#fff',
-                            fontSize: '18px',
-                          }}
-                        >
-                          View
-                        </button>
-                        &nbsp;
-                        <button
-                          style={{
-                            backgroundColor: 'yellow',
-                            color: '#000',
-                            fontSize: '18px',
-                          }}
-                        >
-                          Edit
-                        </button>
-                        &nbsp;
-                        <button
-                          style={{
-                            backgroundColor: 'red',
-                            color: '#fff',
-                            fontSize: '18px',
-                          }}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                );
-              })}
-          </table>
+          <h2>Todo List</h2>
+          {allTodos.length == 0 ? (
+            <div>
+              <h3>No todo found!</h3>
+            </div>
+          ) : (
+            <table style={{ margin: '0 auto', width: '30%' }}>
+              <thead>
+                <th>Sl.No</th>
+                <th>Todo Nme</th>
+                <th>Action</th>
+              </thead>
+              {allTodos &&
+                allTodos.map((eTodo, index) => {
+                  console.log('eTodo->', eTodo);
+                  return (
+                    <tbody>
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>{eTodo.todo}</td>
+                        <td>
+                          <button
+                            style={{
+                              backgroundColor: 'blue',
+                              color: '#fff',
+                              fontSize: '18px',
+                            }}
+                          >
+                            View
+                          </button>
+                          &nbsp;
+                          <button
+                            style={{
+                              backgroundColor: 'yellow',
+                              color: '#000',
+                              fontSize: '18px',
+                            }}
+                          >
+                            Edit
+                          </button>
+                          &nbsp;
+                          <button
+                            style={{
+                              backgroundColor: 'red',
+                              color: '#fff',
+                              fontSize: '18px',
+                            }}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                })}
+            </table>
+          )}
         </div>
       </div>
     </>
