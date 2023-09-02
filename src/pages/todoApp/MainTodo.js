@@ -9,6 +9,12 @@ const MainTodo = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [viewTodoData, setViewTodoData] = useState();
 
+  // Edit state
+  const [editTodoSubject, setEditTodoSubject] = useState('');
+  const [editTodoDescription, setEditTodoDescription] = useState('');
+  const [editTodoId, setEditTodoId] = useState(null);
+  const [errorMsgEdit, setErrorMsgEdit] = useState('');
+
   const onButtonClick = () => {
     if (subject === '' || description === '') {
       setErrorMsg('Please fill the field!');
@@ -21,7 +27,7 @@ const MainTodo = () => {
         todoSubject: subject,
         todoDescription: description,
       };
-      console.log('newTodos->', newTodos);
+      // console.log('newTodos->', newTodos);
       setAllTodos([...allTodos, newTodos]);
       // After add todo then field will be blank
       setSubject('');
@@ -43,11 +49,11 @@ const MainTodo = () => {
   };
 
   const deleteClick = (dId) => {
-    console.log('dId->', dId);
+    // console.log('dId->', dId);
     if (window.confirm('Do you want to delete?')) {
       const removeTodo = [...allTodos].filter((fData, indx) => {
-        console.log('deleteClick-Data->', fData);
-        console.log('deleteClick-Indx->', fData.todoId !== dId);
+        // console.log('deleteClick-Data->', fData);
+        // console.log('deleteClick-Indx->', fData.todoId !== dId);
         return fData.todoId !== dId;
       });
       setAllTodos(removeTodo);
@@ -55,6 +61,39 @@ const MainTodo = () => {
   };
 
   // console.log('viewTodoData->', viewTodoData);
+
+  // Edit Operation
+  const editClick = (edData) => {
+    console.log('edData-->', edData);
+    if (window.confirm('Do you want to edit?')) {
+      setEditTodoId(edData.todoId);
+      setEditTodoSubject(edData.todoSubject);
+      setEditTodoDescription(edData.todoDescription);
+    }
+  };
+
+  const editSubmit = () => {
+    if (!editTodoSubject || !editTodoDescription) {
+      setErrorMsgEdit('Please fill all the field!');
+    } else {
+      const updateTodo = [...allTodos].map((eData) => {
+        console.log('eData->', eData);
+        if (eData.todoId === editTodoId) {
+          eData.todoSubject = editTodoSubject;
+          eData.todoDescription = editTodoDescription;
+        }
+        return eData;
+      });
+      setAllTodos(updateTodo);
+      editCancel();
+    }
+  };
+
+  const editCancel = () => {
+    setEditTodoSubject('');
+    setEditTodoDescription('');
+    setEditTodoId(null);
+  };
 
   return (
     <>
@@ -130,48 +169,106 @@ const MainTodo = () => {
                 <th>Todo Description</th>
                 <th>Action</th>
               </thead>
+              {/* For edit error msg */}
+              <h4>{errorMsgEdit}</h4>
               {allTodos &&
                 allTodos.map((eTodo, index) => {
                   console.log('eTodo->', eTodo);
                   return (
-                    <tbody>
+                    <tbody key={eTodo.todoId}>
                       <tr>
                         <td>{index + 1}</td>
-                        <td>{eTodo.todoSubject}</td>
-                        <td>{eTodo.todoDescription}</td>
-                        <td>
-                          <button
-                            style={{
-                              backgroundColor: 'blue',
-                              color: '#fff',
-                              fontSize: '18px',
-                            }}
-                            onClick={() => viewClick(eTodo)}
-                          >
-                            View
-                          </button>
-                          &nbsp;
-                          <button
-                            style={{
-                              backgroundColor: 'yellow',
-                              color: '#000',
-                              fontSize: '18px',
-                            }}
-                          >
-                            Edit
-                          </button>
-                          &nbsp;
-                          <button
-                            style={{
-                              backgroundColor: 'red',
-                              color: '#fff',
-                              fontSize: '18px',
-                            }}
-                            onClick={() => deleteClick(eTodo.todoId)}
-                          >
-                            Delete
-                          </button>
-                        </td>
+                        {editTodoId === eTodo.todoId ? (
+                          <>
+                            <td>
+                              <input
+                                type="text"
+                                name="editsubject"
+                                id="editsubject"
+                                value={editTodoSubject}
+                                onChange={(ev) =>
+                                  setEditTodoSubject(ev.target.value)
+                                }
+                              />
+                            </td>
+                            <td>
+                              <input
+                                type="text"
+                                name="editdescription"
+                                id="editdescription"
+                                value={editTodoDescription}
+                                onChange={(ev) =>
+                                  setEditTodoDescription(ev.target.value)
+                                }
+                              />
+                            </td>
+                          </>
+                        ) : (
+                          <>
+                            <td>{eTodo.todoSubject}</td>
+                            <td>{eTodo.todoDescription}</td>
+                          </>
+                        )}
+
+                        {editTodoId === eTodo.todoId ? (
+                          <td>
+                            <button
+                              style={{
+                                backgroundColor: 'green',
+                                color: '#fff',
+                                fontSize: '18px',
+                              }}
+                              onClick={() => editSubmit()}
+                            >
+                              Edit Submit
+                            </button>{' '}
+                            <button
+                              style={{
+                                backgroundColor: 'red',
+                                color: '#fff',
+                                fontSize: '18px',
+                              }}
+                              onClick={() => editCancel()}
+                            >
+                              Cancel
+                            </button>
+                          </td>
+                        ) : (
+                          <td>
+                            <button
+                              style={{
+                                backgroundColor: 'blue',
+                                color: '#fff',
+                                fontSize: '18px',
+                              }}
+                              onClick={() => viewClick(eTodo)}
+                            >
+                              View
+                            </button>
+                            &nbsp;
+                            <button
+                              style={{
+                                backgroundColor: 'yellow',
+                                color: '#000',
+                                fontSize: '18px',
+                              }}
+                              onClick={() => editClick(eTodo)}
+                            >
+                              Edit
+                            </button>
+                            &nbsp;
+                            <button
+                              style={{
+                                backgroundColor: 'red',
+                                color: '#fff',
+                                fontSize: '18px',
+                              }}
+                              onClick={() => deleteClick(eTodo.todoId)}
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   );
