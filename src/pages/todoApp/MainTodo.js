@@ -156,6 +156,9 @@ const MainTodo = () => {
         {/* View Todo Html End*/}
 
         <div>
+          {/* For edit error msg */}
+          <h4 style={{ color: 'red' }}>{errorMsgEdit}</h4>
+
           <h2>Todo List</h2>
           {allTodos.length == 0 ? (
             <div>
@@ -169,8 +172,7 @@ const MainTodo = () => {
                 <th>Todo Description</th>
                 <th>Action</th>
               </thead>
-              {/* For edit error msg */}
-              <h4>{errorMsgEdit}</h4>
+
               {allTodos &&
                 allTodos.map((eTodo, index) => {
                   console.log('eTodo->', eTodo);
