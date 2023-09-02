@@ -6,11 +6,13 @@ import PracTodo from './pages/newtodoApp/PracTodo';
 import MainTodo from './pages/todoApp/MainTodo';
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import ViewTodo from './pages/todoApp/ViewTodo';
+import MenuBar from './pages/navmenu/MenuMar';
 
 function App() {
   return (
     <div className="App">
       <h1>React18-New Applications</h1>
+      <MenuBar />
       <Routes>
         <Route exact path="/" element={<MainTodo />} />
         <Route exact path="/practodo" element={<PracTodo />} />
