@@ -13,9 +13,8 @@ const MenuBar = () => {
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <Dropdown.Item href="/small-cal">
-                  Small Calculator App
-                </Dropdown.Item>
+                <Dropdown.Item href="/practodo">Practice Todo</Dropdown.Item>
+                {/* <Dropdown.Item href="/practodo">Practice Todo</Dropdown.Item> */}
               </NavDropdown>
             </Nav>
           </Container>
