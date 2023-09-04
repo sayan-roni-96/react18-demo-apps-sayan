@@ -5,16 +5,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function PracTodo() {
   const [todos, setTodos] = useState([]);
   const [errorMsg, setErrorMsg] = useState('')
-  const [newTodo, setNewTodo] = useState('');
+  const [newName, setNewName] = useState('');
+  const [newAbout, setNewAbout] = useState('');
 
-  const addTodo = () => {
-    if (newTodo !== '') {
-      const newPracTodo = {
-        todoData:newTodo, 
+  const addProfile = () => {
+    if (newName !== '' || newAbout !== '') {
+      const newProfileTodo = {
+        todoId:Date.now(),
+        todoName:newName,
+        todoAbout:newAbout
       }
-      console.log('newPracTodo->',newPracTodo)
-      setTodos([...todos,newPracTodo]);
-      setNewTodo('');
+      console.log('newProfileTodo->',newProfileTodo)
+      setTodos([...todos,newProfileTodo]);
+      setNewName('');
+      setNewAbout('');
     }else{
       setErrorMsg('Please fill the field!');
       setTimeout(() => {
@@ -22,7 +26,7 @@ function PracTodo() {
       }, 1000);
     }
   };
-console.log('todos->',todos)
+//console.log('todos->',todos)
   return (
     <div className="container mt-5">
 
@@ -35,12 +39,20 @@ console.log('todos->',todos)
         style = {{width: "20%" , marginleft: '24px'}}
           type="text"
           className="form-control"
-          placeholder="Enter a new todo"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
+          placeholder="Name"
+          value={newName}
+          onChange={(e) => setNewName(e.target.value)}
+        />
+        <input
+        style = {{width: "20%" , marginleft: '24px'}}
+          type="text"
+          className="form-control"
+          placeholder="About"
+          value={newAbout}
+          onChange={(e) => setNewAbout(e.target.value)}
         />
         <div className="input-group-append ml-2">
-          <button className="btn btn-primary" type="button" onClick={addTodo}>
+          <button className="btn btn-primary" type="button" onClick={addProfile}>
             Add
           </button>
         </div>
@@ -48,19 +60,57 @@ console.log('todos->',todos)
       <div>
           <p style={{ color: 'red', fontSize: '16px' }}>{errorMsg}</p>
         </div>
-      {<div className="lists">
-        {todos.map((todo, index) => (
-          <Fragment Key = {index}>
-          <div className='list-flex'>{index + 1}.</div>
-          <div className='list-flex'>
-            {todo.todoData}
+        <h2>Todo List</h2>
+        {todos.length == 0 ?(
+          <div>
+          <h2>No Data Found!</h2>
           </div>
-          </Fragment>
-        ))}
-      </div>}
-
-        
-
+        ):(
+          <table style={{ margin: '0 auto', width: '70%' }}>
+        <thead>
+                <th>Sl.No</th>
+                <th>Name</th>
+                <th>About</th>
+                <th>Action</th>
+              </thead>
+              {todos.map((todo, index) => (
+              <tr>
+                <td>{index+1}.</td>
+                <td>{todo.todoName}</td>
+                <td>{todo.todoAbout}</td>
+                <td><button
+                              style={{
+                                backgroundColor: 'blue',
+                                color: '#fff',
+                                fontSize: '18px',
+                              }}
+                            >
+                              View
+                            </button>
+                            &nbsp;
+                            <button
+                              style={{
+                                backgroundColor: 'yellow',
+                                color: '#000',
+                                fontSize: '18px',
+                              }}
+                            >
+                              Edit
+                            </button>
+                            &nbsp;
+                            <button
+                              style={{
+                                backgroundColor: 'red',
+                                color: '#fff',
+                                fontSize: '18px',
+                              }}
+                            >
+                              Delete
+                            </button></td>
+              </tr>
+              ))}
+        </table>
+        )}
       </div>
       </div>
 
