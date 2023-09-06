@@ -7,6 +7,7 @@ function PracTodo() {
   const [errorMsg, setErrorMsg] = useState('')
   const [newName, setNewName] = useState('');
   const [newAbout, setNewAbout] = useState('');
+  const [newViewData, setViewData] = useState('');
 
   const addProfile = () => {
     if (newName !== '' || newAbout !== '') {
@@ -27,6 +28,26 @@ function PracTodo() {
     }
   };
 //console.log('todos->',todos)
+const viewDataclick =(viewData)=>{
+ //console.log('viewData=>',viewData)
+ setViewData(viewData);
+ setTimeout(()=>{
+  setViewData('');
+ },5000)}
+//console.log('newViewData=>',newViewData)
+
+   {/*Delete Function*/}
+    const deleteDataclick = (deleteID)=> {
+      if (window.confirm('Do you want to Delete Data ?')) {
+      //console.log('deleteID=>',deleteID)
+      const deleteData = [...todos].filter((dedata,delDid)=>{
+        return dedata.todoId != deleteID;
+      })
+      setTodos(deleteData);
+    }
+    };
+   {/*Delete Function*/}
+
   return (
     <div className="container mt-5">
 
@@ -60,6 +81,18 @@ function PracTodo() {
       <div>
           <p style={{ color: 'red', fontSize: '16px' }}>{errorMsg}</p>
         </div>
+       { /* VIEW DATA LIST */}
+       { /* ekhane newViewData ekta object tai === ba == bosano jbe na tai ekhane ! bosate hbe */}
+       {
+        !newViewData ? (<></>) : (
+          <div className="view_div">
+            <h2>View Specific Data</h2>
+            <h4>Name: {newViewData.todoName}</h4>
+            <h5>About:{newViewData.todoAbout}</h5>
+          </div>
+        )
+       }
+       {/*END VIEW DATA LIST*/}
         <h2>Todo List</h2>
         {todos.length == 0 ?(
           <div>
@@ -84,6 +117,7 @@ function PracTodo() {
                                 color: '#fff',
                                 fontSize: '18px',
                               }}
+                              onClick={()=> viewDataclick(todo)}
                             >
                               View
                             </button>
@@ -104,6 +138,7 @@ function PracTodo() {
                                 color: '#fff',
                                 fontSize: '18px',
                               }}
+                              onClick={()=> deleteDataclick(todo.todoId )}
                             >
                               Delete
                             </button></td>
