@@ -7,6 +7,21 @@ const SmallCalculator = () => {
 
   console.log('inputs-->', typeof firstInput, secondInput);
 
+  // regex vallidation for input field for integer/ number
+  const firstHandleChange = (e) => {
+    const regex = /^[0-9\b]+$/;
+    if (e.target.value === "" || regex.test(e.target.value)) {
+      setFirstInput(e.target.value);
+    }
+  };
+
+  const secondHandleChange = (e) => {
+    const regex1 = /^[0-9\b]+$/;
+    if (e.target.value === "" || regex1.test(e.target.value)) {
+      setSecondInput(e.target.value);
+    }
+  };
+
   const plusClick = () => {
     const plusData = parseInt(firstInput) + parseInt(secondInput);
     // console.log('plusData=>', plusData);
@@ -68,7 +83,7 @@ const SmallCalculator = () => {
           name="first_input"
           id="first_input"
           value={firstInput}
-          onChange={(e) => setFirstInput(e.target.value)}
+          onChange={firstHandleChange}
         />
         <input
           className="m-4"
@@ -76,7 +91,7 @@ const SmallCalculator = () => {
           name="second_input"
           id="second_input"
           value={secondInput}
-          onChange={(e) => setSecondInput(e.target.value)}
+          onChange={secondHandleChange}
         />
         <span style={{ fontSize: 30 }}>=</span>
         <input
