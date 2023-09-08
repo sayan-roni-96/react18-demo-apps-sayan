@@ -10,7 +10,7 @@ const SmallCalculator = () => {
   const plusClick = () => {
     const plusData = parseInt(firstInput) + parseInt(secondInput);
     // console.log('plusData=>', plusData);
-    //parseInt use to convert string to number
+    //parseInt use to convert string to number in js
     setResult(plusData);
     setTimeout(() => {
       setFirstInput('');
