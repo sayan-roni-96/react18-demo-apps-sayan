@@ -14,7 +14,7 @@ const MenuBar = () => {
               <Nav.Link href="/">Home</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <Dropdown.Item href="/practodo">Practice Todo</Dropdown.Item>
-                {/* <Dropdown.Item href="/practodo">Practice Todo</Dropdown.Item> */}
+                <Dropdown.Item href="/counter">Small Counter</Dropdown.Item>
               </NavDropdown>
             </Nav>
           </Container>

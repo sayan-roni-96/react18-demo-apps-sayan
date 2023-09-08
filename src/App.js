@@ -7,6 +7,7 @@ import MainTodo from './pages/todoApp/MainTodo';
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import ViewTodo from './pages/todoApp/ViewTodo';
 import MenuBar from './pages/navmenu/MenuMar';
+import SmallCounter from './pages/smallApps/SmallCounter';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/" element={<MainTodo />} />
         <Route exact path="/practodo" element={<PracTodo />} />
         <Route exact path="/view" element={<ViewTodo />} />
+        <Route exact path="/counter" element={<SmallCounter />} />
       </Routes>
     </div>
   );
