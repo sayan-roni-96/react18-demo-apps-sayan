@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Loaders from '../../components/Loaders';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import ViewModal from './modals/ViewModal';
 
 const UserList = () => {
   const [allUserData, setAllUserData] = useState([]);
@@ -32,12 +31,12 @@ const UserList = () => {
     getAllUserData();
   }, []);
 
-  console.log('allUserData==>', allUserData);
+  // console.log('allUserData==>', allUserData);
 
   const handleClose = () => setShowViewModal(false);
 
   const viewUserDetail = (viewUser) => {
-    console.log('viewUser=>', viewUser);
+    // console.log('viewUser=>', viewUser);
     setShowViewModal(true);
     if (viewUser) {
       setViewSingleUser(viewUser);
@@ -47,33 +46,12 @@ const UserList = () => {
   return (
     <div className="container">
       {/* View Modal Start */}
+      <ViewModal
+        showViewModal={showViewModal}
+        handleClose={handleClose}
+        viewSingleUser={viewSingleUser}
+      />
 
-      <Modal
-        show={showViewModal}
-        onHide={handleClose}
-        // backdrop="static"
-        keyboard={false}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>
-            User Detail of {viewSingleUser && viewSingleUser.name}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div>
-            <h2>User Id:== {viewSingleUser && viewSingleUser.id}</h2>
-            <h3>Email:== {viewSingleUser && viewSingleUser.email}</h3>
-            <p>Phone:== {viewSingleUser && viewSingleUser.phone}</p>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
       {/* View Modal End */}
 
       <h1>User List</h1>
