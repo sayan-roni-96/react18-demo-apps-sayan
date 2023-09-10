@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const SmallCalculator = () => {
   const [firstInput, setFirstInput] = useState('');
   const [secondInput, setSecondInput] = useState('');
   const [result, setResult] = useState('');
+
+  const textInput = useRef(null);
 
   console.log('inputs-->', typeof firstInput, secondInput);
 
@@ -73,7 +75,13 @@ const SmallCalculator = () => {
     setSecondInput('');
     setResult('');
   };
-  console.log('result->', result, typeof result);
+  console.log('result->', result);
+
+  // When browser loaded then primary field focused
+  useEffect(() => {
+    textInput.current.focus();
+  }, []);
+
   return (
     <div className="container">
       <h2>Calculator App</h2>
@@ -84,6 +92,7 @@ const SmallCalculator = () => {
           name="first_input"
           id="first_input"
           value={firstInput}
+          ref={textInput}
           onChange={firstHandleChange}
         />
         <input
@@ -110,6 +119,7 @@ const SmallCalculator = () => {
             className="m-4 btn btn-success"
             style={{ width: 56 }}
             onClick={() => plusClick()}
+            disabled={firstInput == '' || secondInput == '' ? true : false}
           >
             <span style={{ fontSize: 25 }}>+</span>
           </button>
@@ -118,17 +128,26 @@ const SmallCalculator = () => {
             className="m-4 btn btn-primary"
             style={{ width: 56 }}
             onClick={() => minusClick()}
+            disabled={firstInput == '' || secondInput == '' ? true : false}
           >
             <span style={{ fontSize: 25 }}> -</span>
           </button>
 
-          <button className="m-4 btn btn-warning" style={{ width: 56 }}>
+          <button
+            className="m-4 btn btn-warning"
+            style={{ width: 56 }}
+            disabled={firstInput == '' || secondInput == '' ? true : false}
+          >
             <span style={{ fontSize: 25 }} onClick={() => multipleClick()}>
               x
             </span>
           </button>
 
-          <button className="m-4 btn btn-info" style={{ width: 56 }}>
+          <button
+            className="m-4 btn btn-info"
+            style={{ width: 56 }}
+            disabled={firstInput == '' || secondInput == '' ? true : false}
+          >
             <span style={{ fontSize: 25 }} onClick={() => divisionClick()}>
               {' '}
               ÷
@@ -138,6 +157,7 @@ const SmallCalculator = () => {
             className="m-4 btn btn-danger"
             style={{ width: '14%' }}
             onClick={() => resetField()}
+            disabled={firstInput == '' || secondInput == '' ? true : false}
           >
             <span style={{ fontSize: 25 }}> Reset</span>
           </button>
