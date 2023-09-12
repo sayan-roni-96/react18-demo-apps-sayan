@@ -21,6 +21,9 @@ const MenuBar = () => {
                 <Dropdown.Item href="/userlist">
                   User List Fake Jason Server
                 </Dropdown.Item>
+                <Dropdown.Item href="/newuserlist">
+                  New User List Fake Jason Server
+                </Dropdown.Item>
               </NavDropdown>
             </Nav>
           </Container>

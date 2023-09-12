@@ -10,6 +10,7 @@ import MenuBar from './pages/navmenu/MenuMar';
 import SmallCounter from './pages/smallApps/SmallCounter';
 import SmallCalculator from './pages/smallApps/SmallCalculator';
 import UserList from './pages/appUsingApi/jsonfakeapi/UserList';
+import NewUserList from './pages/appUsingApi/jsonfakeapi/NewUserList';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
 
         {/* API Ops */}
         <Route exact path="/userlist" element={<UserList />} />
+        <Route exact path="/newuserlist" element={<NewUserList />} />
       </Routes>
     </div>
   );
