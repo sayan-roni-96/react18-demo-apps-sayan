@@ -1,11 +1,15 @@
 import React,{useEffect,useState} from 'react';
 import Loaders from '../../components/Loaders';
-
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+//import NewViewModel from './modals/NewViewModel';
  
 const NewUserList = () => {
     const[allNewUserData, setAllNewUserData] = useState([]);
     const [newLoading, addNewLoading] = useState(false);
+    const [newDatashow, setnewDatashow] = useState(false);
+    const [userDetail, setuserDetail] = useState()
  
     const getUserlist = ()=> {
         addNewLoading(true);
@@ -25,9 +29,47 @@ const NewUserList = () => {
         getUserlist();
       }, []);
 
-      console.log('allNewUserData->',allNewUserData);
+    console.log('allNewUserData->',allNewUserData);
+
+    
+
+    const handleClose = () => setnewDatashow(false);
+    //const handleShow = () => setnewDatashow(true);
+    const showDataModal = (newVData)=>{
+      console.log('newVData=>',newVData);
+      setnewDatashow(true);
+      setuserDetail(newVData);
+    }
   return (
     <div className='container'>
+      {/* view modal */}
+      {/* <Button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </Button> */}
+
+      <Modal show={newDatashow} onHide={handleClose}  aria-labelledby="contained-modal-title-vcenter"
+       centered>
+        <Modal.Header closeButton>
+          <Modal.Title>User Details Of {userDetail && userDetail.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ul>
+            <li> Name : {userDetail && userDetail.name}</li>
+            <li> Phone : {userDetail && userDetail.phone}</li>
+            <li> Email :{userDetail && userDetail.email}</li>
+            <li> City : {userDetail && userDetail.address.city}</li>
+          </ul>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* view modal end*/}
         <h1>User List</h1>
          <div className="mb-4">
            <button className="btn btn-primary">Add New User</button>{' '}
@@ -60,7 +102,7 @@ const NewUserList = () => {
                       <td>{unData.email}</td>
                       <td>{unData.address.city}</td>
                       <td>
-                          <button className="btn btn-info">View</button>{' '}
+                          <button className="btn btn-info" onClick={()=> showDataModal(unData)}>View</button>{' '}
                           <button className="btn btn-warning">Edit</button>{' '}
                           <button className="btn btn-danger">Delete</button>
                       </td>
