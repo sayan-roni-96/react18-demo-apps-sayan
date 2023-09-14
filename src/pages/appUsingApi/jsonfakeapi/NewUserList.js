@@ -9,7 +9,14 @@ const NewUserList = () => {
     const[allNewUserData, setAllNewUserData] = useState([]);
     const [newLoading, addNewLoading] = useState(false);
     const [newDatashow, setnewDatashow] = useState(false);
-    const [userDetail, setuserDetail] = useState()
+    // const [newEditDatashow, setnewEditDatashow] = useState(false);
+    // const [edituserDetail, setedituserDetail] = useState();
+    const [userDetail, setuserDetail] = useState();
+    const [editUserId, setEditUserId] = useState('null');
+    const [editUserName, setEditUserName] = useState('');
+    const [editUserPhone, setEditUserPhone] = useState('');
+    const [editUserEmail, setEditUserEmail] = useState('');
+    const [editUserCity, setEditUserCity] = useState('')
  
     const getUserlist = ()=> {
         addNewLoading(true);
@@ -32,7 +39,7 @@ const NewUserList = () => {
     console.log('allNewUserData->',allNewUserData);
 
     
-
+   {/*this modal operation use for view purpose*/ }
     const handleClose = () => setnewDatashow(false);
     //const handleShow = () => setnewDatashow(true);
     const showDataModal = (newVData)=>{
@@ -40,13 +47,50 @@ const NewUserList = () => {
       setnewDatashow(true);
       setuserDetail(newVData);
     }
+   
+    // {/*this modal operation use for edit  purpose*/ }
+    // const editHandleClose = () => setnewEditDatashow(false);
+    // //const handleShow = () => setnewDatashow(true);
+    // const showEditDataModal = (newEData)=>{
+    //   console.log('newEData=>',newEData);
+    //   setnewEditDatashow(true);
+    //   setedituserDetail(newEData);
+    // }
+    //  {/*end  this modal operation use for edit purpose*/ }
+
+
+    /* delete user data from api*/ 
+    const deleteUserClick = (deluserid) =>{
+      if(window.confirm('Do you want to Delete Data ?')){
+        //console.log('deluserid=>',deluserid)
+        const deleteUserData = [...allNewUserData].filter((deluserdata) => {
+          //console.log('deluserdata=>',deluserdata);
+          return deluserdata.id != deluserid;
+        })
+        setAllNewUserData(deleteUserData);
+      }
+    }
+
+    {/* Edit Click Function*/ }
+  const editUserClick = (editUserClk) => {
+    console.log('editUserClk->', editUserClk.address.city);
+     setEditUserId(editUserClk.id);
+     setEditUserName(editUserClk.name);
+     setEditUserPhone(editUserClk.phone);
+     setEditUserEmail(editUserClk.email);
+     setEditUserCity(editUserClk.city);
+
+   
+  };
+{/*edit click function end */}
+
   return (
     <div className='container'>
       {/* view modal */}
       {/* <Button variant="primary" onClick={handleShow}>
         Launch demo modal
       </Button> */}
-
+{/*this modal use for view purpose*/}
       <Modal show={newDatashow} onHide={handleClose}  aria-labelledby="contained-modal-title-vcenter"
        centered>
         <Modal.Header closeButton>
@@ -70,6 +114,8 @@ const NewUserList = () => {
         </Modal.Footer>
       </Modal>
       {/* view modal end*/}
+
+       
         <h1>User List</h1>
          <div className="mb-4">
            <button className="btn btn-primary">Add New User</button>{' '}
@@ -103,8 +149,8 @@ const NewUserList = () => {
                       <td>{unData.address.city}</td>
                       <td>
                           <button className="btn btn-info" onClick={()=> showDataModal(unData)}>View</button>{' '}
-                          <button className="btn btn-warning">Edit</button>{' '}
-                          <button className="btn btn-danger">Delete</button>
+                          <button className="btn btn-warning" onClick={() => editUserClick(unData)}>Edit</button>{' '}
+                          <button className="btn btn-danger" onClick={() => deleteUserClick(unData.id)}>Delete</button>
                       </td>
                    </tr>
               </tbody></>
