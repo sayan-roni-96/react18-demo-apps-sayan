@@ -3,7 +3,9 @@ import Loaders from '../../components/Loaders';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-//import NewViewModel from './modals/NewViewModel';
+import NewViewModal from './modals/NewViewModal';
+import NewEditModal from './modals/NewEditModal';
+
  
 const NewUserList = () => {
     const[allNewUserData, setAllNewUserData] = useState([]);
@@ -109,86 +111,15 @@ const NewUserList = () => {
     <div className='container'>
       {/* view modal */}
       {/*this modal use for view purpose*/}
-      <Modal show={newDatashow} onHide={handleClose}  aria-labelledby="contained-modal-title-vcenter"
-       centered>
-        <Modal.Header closeButton>
-          <Modal.Title>User Details Of {userDetail && userDetail.name}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <ul>
-            <li> Name : {userDetail && userDetail.name}</li>
-            <li> Phone : {userDetail && userDetail.phone}</li>
-            <li> Email :{userDetail && userDetail.email}</li>
-            <li> City : {userDetail && userDetail.address.city}</li>
-          </ul>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <NewViewModal newDatashow = {newDatashow} handleClose = {handleClose} userDetail = {userDetail}/>
       {/* view modal end*/}
 
       {/*this modal use for edit purpose*/}
-         <Modal show={newEditDatashow} onHide={editHandleClose}  aria-labelledby="contained-modal-title-vcenter"
-       centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit User Details</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-              <><li>Name: <input
-                    style={{ width: "50%", marginleft: '24px',display: 'flex', alignitems: 'center',columngap: '10px' }}
-                    type="text"
-                    className="form-control"
-                    placeholder="Name"
-                    value={editUserName}
-                    onChange={(ev) => setEditUserName(ev.target.value)}
-                   /></li>
-              <li> Phone :<input
-                    style={{ width: "50%", marginleft: '24px' }}
-                    type="text"
-                    className="form-control"
-                    placeholder="Phone"
-                    value={editUserPhone}
-                    onChange={(ev) => setEditUserPhone(ev.target.value)}
-                   /></li>
-                   <li> Email :<input
-                        style={{ width: "50%", marginleft: '24px' }}
-                        type="email"
-                        className="form-control"
-                        placeholder="Email"
-                        value={editUserEmail}
-                        onChange={(ev) => setEditUserEmail(ev.target.value)}
-                      />
-                   </li>
-                  <li> City: <input
-                        style={{ width: "100%", marginleft: '24px' }}
-                        type="text"
-                        className="form-control"
-                        placeholder="City"
-                        value={editUserCity}
-                        onChange={(ev) => setEditUserCity(ev.target.value)}
-                      />
-                      </li>
-                      </>
-            
-          
-          
-          
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={editUserDataCancel}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={() => editUserSubmit()}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+       <NewEditModal newEditDatashow = {newEditDatashow} editHandleClose = {editHandleClose} editUserName = {editUserName}
+       setEditUserName = {setEditUserName} editUserPhone = {editUserPhone} setEditUserPhone = {setEditUserPhone}
+       editUserEmail = {editUserEmail} setEditUserEmail = {setEditUserEmail} editUserCity = {editUserCity}
+       setEditUserCity = {setEditUserCity} editUserDataCancel = {editUserDataCancel} editUserSubmit ={editUserSubmit}
+       />
       {/* edit modal end*/}
 
 
