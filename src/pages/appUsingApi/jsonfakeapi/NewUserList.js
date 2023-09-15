@@ -9,10 +9,10 @@ const NewUserList = () => {
     const[allNewUserData, setAllNewUserData] = useState([]);
     const [newLoading, addNewLoading] = useState(false);
     const [newDatashow, setnewDatashow] = useState(false);
-    // const [newEditDatashow, setnewEditDatashow] = useState(false);
-    // const [edituserDetail, setedituserDetail] = useState();
+    const [newEditDatashow, setnewEditDatashow] = useState(false);
+    //const [edituserDetail, setedituserDetail] = useState();
     const [userDetail, setuserDetail] = useState();
-    const [editUserId, setEditUserId] = useState('null');
+    const [editUserId, setEditUserId] = useState(null);
     const [editUserName, setEditUserName] = useState('');
     const [editUserPhone, setEditUserPhone] = useState('');
     const [editUserEmail, setEditUserEmail] = useState('');
@@ -48,15 +48,21 @@ const NewUserList = () => {
       setuserDetail(newVData);
     }
    
-    // {/*this modal operation use for edit  purpose*/ }
-    // const editHandleClose = () => setnewEditDatashow(false);
-    // //const handleShow = () => setnewDatashow(true);
-    // const showEditDataModal = (newEData)=>{
-    //   console.log('newEData=>',newEData);
-    //   setnewEditDatashow(true);
-    //   setedituserDetail(newEData);
-    // }
-    //  {/*end  this modal operation use for edit purpose*/ }
+    {/*this modal operation use for edit  purpose*/ }
+    const editHandleClose = () => setnewEditDatashow(false);
+    //const handleShow = () => setnewDatashow(true);
+    const showEditDataModal = (newEData)=>{
+      console.log('newEData=>',newEData);
+      setnewEditDatashow(true);
+      setEditUserId(newEData.id);
+      setEditUserName(newEData.name);
+      setEditUserPhone(newEData.phone);
+      setEditUserEmail(newEData.email);
+      setEditUserCity(newEData.address.city);
+    }
+
+    console.log('editUserId->',editUserId);
+     {/*end  this modal operation use for edit purpose*/ }
 
 
     /* delete user data from api*/ 
@@ -71,26 +77,38 @@ const NewUserList = () => {
       }
     }
 
-    {/* Edit Click Function*/ }
-  const editUserClick = (editUserClk) => {
-    console.log('editUserClk->', editUserClk.address.city);
-     setEditUserId(editUserClk.id);
-     setEditUserName(editUserClk.name);
-     setEditUserPhone(editUserClk.phone);
-     setEditUserEmail(editUserClk.email);
-     setEditUserCity(editUserClk.city);
-
-   
+    {/*Edit Submit */ }
+  const editUserSubmit = () => {
+      const updatedUser = [...allNewUserData].map((dataEditUser) => {
+        console.log('dataEditUser=>', dataEditUser)
+        if (editUserId == dataEditUser.id) {
+          dataEditUser.name = editUserName;
+          dataEditUser.phone = editUserPhone;
+          dataEditUser.email = editUserEmail;
+          dataEditUser.address.city = editUserCity;
+        }
+        return dataEditUser;
+      })
+      setAllNewUserData(updatedUser);
+      editHandleClose();
+      editUserDataCancel();
+    
   };
-{/*edit click function end */}
+   {/*Edit Submit End */ }
+
+    {/*User Cancel Button */ }
+  const editUserDataCancel = () => {
+      setEditUserName('');
+      setEditUserPhone('');
+      setEditUserEmail('');
+      setEditUserCity('');
+      setEditUserId(null)
+  };
 
   return (
     <div className='container'>
       {/* view modal */}
-      {/* <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button> */}
-{/*this modal use for view purpose*/}
+      {/*this modal use for view purpose*/}
       <Modal show={newDatashow} onHide={handleClose}  aria-labelledby="contained-modal-title-vcenter"
        centered>
         <Modal.Header closeButton>
@@ -114,6 +132,65 @@ const NewUserList = () => {
         </Modal.Footer>
       </Modal>
       {/* view modal end*/}
+
+      {/*this modal use for edit purpose*/}
+         <Modal show={newEditDatashow} onHide={editHandleClose}  aria-labelledby="contained-modal-title-vcenter"
+       centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit User Details</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+              <><li>Name: <input
+                    style={{ width: "50%", marginleft: '24px',display: 'flex', alignitems: 'center',columngap: '10px' }}
+                    type="text"
+                    className="form-control"
+                    placeholder="Name"
+                    value={editUserName}
+                    onChange={(ev) => setEditUserName(ev.target.value)}
+                   /></li>
+              <li> Phone :<input
+                    style={{ width: "50%", marginleft: '24px' }}
+                    type="text"
+                    className="form-control"
+                    placeholder="Phone"
+                    value={editUserPhone}
+                    onChange={(ev) => setEditUserPhone(ev.target.value)}
+                   /></li>
+                   <li> Email :<input
+                        style={{ width: "50%", marginleft: '24px' }}
+                        type="email"
+                        className="form-control"
+                        placeholder="Email"
+                        value={editUserEmail}
+                        onChange={(ev) => setEditUserEmail(ev.target.value)}
+                      />
+                   </li>
+                  <li> City: <input
+                        style={{ width: "100%", marginleft: '24px' }}
+                        type="text"
+                        className="form-control"
+                        placeholder="City"
+                        value={editUserCity}
+                        onChange={(ev) => setEditUserCity(ev.target.value)}
+                      />
+                      </li>
+                      </>
+            
+          
+          
+          
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={editUserDataCancel}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={() => editUserSubmit()}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* edit modal end*/}
+
 
        
         <h1>User List</h1>
@@ -149,7 +226,7 @@ const NewUserList = () => {
                       <td>{unData.address.city}</td>
                       <td>
                           <button className="btn btn-info" onClick={()=> showDataModal(unData)}>View</button>{' '}
-                          <button className="btn btn-warning" onClick={() => editUserClick(unData)}>Edit</button>{' '}
+                          <button className="btn btn-warning" onClick={() => showEditDataModal(unData)}>Edit</button>{' '}
                           <button className="btn btn-danger" onClick={() => deleteUserClick(unData.id)}>Delete</button>
                       </td>
                    </tr>
