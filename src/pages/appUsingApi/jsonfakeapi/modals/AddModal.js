@@ -1,12 +1,11 @@
 import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 
-const AddModal = ({addUserPhone,setaddUserName,addUserName,addHandleClose,newAddDatashow,setaddUserPhone,addUserEmail
-,setaddUserEmail,addUser}) => {
+const AddModal = ({newAddDatashow, setnewAddDatashow, addUserName, setaddUserName, addUserEmail, setaddUserEmail, addUserPhone, setaddUserPhone, errAddUser, addUser}) => {
   return (
     <Modal
       show={newAddDatashow}
-      onHide={addHandleClose}
+      onHide={()=> setnewAddDatashow(false)}
       backdrop="static"
       keyboard={false}
       aria-labelledby="contained-modal-title-vcenter"
@@ -18,52 +17,37 @@ const AddModal = ({addUserPhone,setaddUserName,addUserName,addHandleClose,newAdd
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      <><div className='editmodalinp'>Name: <input
-                 style={{ width: "50%", marginleft: '24px' }}
-                 type="text"
-                 className="form-control"
-                 placeholder="Name"
-                 value={addUserName}
-                 onChange={(ev) => setaddUserName(ev.target.value)}
-                /></div>
-              <div className='editmodalinp'> Phone :<input
-                 style={{ width: "50%", marginleft: '24px' }}
-                 type="text"
-                 className="form-control"
-                 placeholder="Phone"
-                 value={addUserPhone}
-                 onChange={(ev) => setaddUserPhone(ev.target.value)}
-                /></div>
-                <div className='editmodalinp'> Email :<input
-                     style={{ width: "50%", marginleft: '24px' }}
-                     type="email"
-                     className="form-control"
-                     placeholder="Email"
-                     value={addUserEmail}
-                     onChange={(ev) => setaddUserEmail(ev.target.value)}
-                   />
-                </div>
-               {/* <div className='editmodalinp'> City: <input
-                     style={{ width: "50%", marginleft: '24px' }}
-                     type="text"
-                     className="form-control"
-                     placeholder="City"
-                     value={addUserCity}
-                     onChange={(ev) => setaddUserCity(ev.target.value)}
-                   />
-                   </div> */}
-                   </> 
+      <form>
+  <div className="mb-3">
+    <label className="form-label">Name </label>
+    <input type="text" className="form-control" id="username" name="username" value={addUserName} onChange={(e) => setaddUserName(e.target.value)}  />
+    
+  </div>
+  <div className="mb-3">
+    <label className="form-label">Email address</label>
+    <input type="email" className="form-control" id="useremail" name="useremail" value={addUserEmail} onChange={(e) =>setaddUserEmail(e.target.value) }  />
+    
+  </div>
+  
+  <div className="mb-3">
+    <label className="form-label">Phone </label>
+    <input type="email" className="form-control" id="phone" name="phone" value={addUserPhone} onChange={(e) =>setaddUserPhone(e.target.value) }  />
+    
+  </div>
+ 
+</form> 
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={addHandleClose}>
+      <div>
+            <p style={{ color: 'red', fontSize: '16px' }}>{errAddUser}</p>
+          </div>
+        <Button variant="secondary" onClick={() => setnewAddDatashow(false)}>
           Close
         </Button>
         <Button variant="primary" onClick={addUser}>
          Save Changes
        </Button>
-          {/* <div>
-            <p style={{ color: 'red', fontSize: '16px' }}>{errorUserMsg}</p>
-          </div> */}
+         
       </Modal.Footer>
     </Modal>
   )

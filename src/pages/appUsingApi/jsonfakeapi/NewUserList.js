@@ -21,10 +21,12 @@ const NewUserList = () => {
     const [editUserPhone, setEditUserPhone] = useState('');
     const [editUserEmail, setEditUserEmail] = useState('');
     const [editUserCity, setEditUserCity] = useState('')
+    // for add user state
     const [addUserName, setaddUserName] = useState('');
-    const [addUserPhone, setaddUserPhone] = useState('');
     const [addUserEmail, setaddUserEmail] = useState('');
-    //const [addUserCity, setaddUserCity] = useState('');
+
+    const [addUserPhone, setaddUserPhone] = useState('');
+    const [errAddUser, setErrAddUser] = useState('');
 
     
  
@@ -46,26 +48,12 @@ const NewUserList = () => {
         getUserlist();
       }, []);
 
-    console.log('allNewUserData->',allNewUserData);
 
     {/*this modal operation use for Add User  purpose*/ }
-    const addHandleClose = () => setnewAddDatashow(false);
+   
     //const handleShow = () => setnewDatashow(true);
     
-      const addUser = ()=>{
-        const newUserAdd = {
-          id: Date.now(),
-          name: addUserName,
-          phone: addUserPhone,
-          email:addUserEmail,
-        }
-        setAllNewUserData([...allNewUserData,newUserAdd]);
-        setnewAddDatashow(true);
-        setaddUserName('');
-        setaddUserPhone('');
-        setaddUserEmail('');
-        // addHandleClose();
-  }
+
     
     
    {/*this modal operation use for view purpose*/ }
@@ -90,7 +78,7 @@ const NewUserList = () => {
       setEditUserCity(newEData.address.city);
     }
 
-    console.log('editUserId->',editUserId);
+    // console.log('editUserId->',editUserId);
      {/*end  this modal operation use for edit purpose*/ }
 
 
@@ -134,13 +122,38 @@ const NewUserList = () => {
       setEditUserId(null)
   };
 
+
+  // console.log('allNewUserData->',allNewUserData);
+
+  const addUser = ()=>{
+    if(!addUserName || !addUserPhone || !addUserEmail) {
+      setErrAddUser('Please fill all fields!');
+      setTimeout(() => {
+        setErrAddUser('');
+      }, 1000);
+    } else {
+      const newUserAdd = {
+        id: Date.now(),
+        name: addUserName,
+        phone: addUserPhone,
+        email:addUserEmail,
+      }
+      console.log('newUserAdd==>', newUserAdd);
+      setAllNewUserData([...allNewUserData,newUserAdd]);
+     
+      setaddUserName('');
+      setaddUserPhone('');
+      setaddUserEmail('');
+      setnewAddDatashow(false);
+    }
+    
+   
+}
+
   return (
     <div className='container'>
       {/* Add data Modal*/}
-      <AddModal addUserPhone ={addUserPhone} setaddUserName = {setaddUserName} addUserName ={addUserName}
-      addHandleClose = {addHandleClose} newAddDatashow = {newAddDatashow} setaddUserPhone = {setaddUserPhone}
-      addUserEmail = {addUserEmail} setaddUserEmail = {setaddUserEmail} addUser = {addUser}
-     />
+     <AddModal newAddDatashow={newAddDatashow} setnewAddDatashow={setnewAddDatashow} addUserName={addUserName} setaddUserName={setaddUserName} addUserEmail={addUserEmail} addUserPhone={addUserPhone} setaddUserEmail={setaddUserEmail} setaddUserPhone={setaddUserPhone} errAddUser={errAddUser} addUser={addUser}  />
      
        {/* End Add data Modal*/}
       {/* view modal */}
@@ -160,14 +173,14 @@ const NewUserList = () => {
        
         <h1>User List</h1>
          <div className="mb-4">
-           <button className="btn btn-primary" onClick={()=> addUser()}>Add New User</button>{' '}
+           <button className="btn btn-primary" onClick={()=> setnewAddDatashow(true)}>Add New User</button>{' '}
          </div>
          {newLoading ? (
            <><Loaders /></>
          ):!allNewUserData ?
          (<><h2>No data Found</h2> </>)
          :(
-         <table class="table table-success table-striped mt-4">
+         <table className="table table-success table-striped mt-4">
             <thead>
                 <tr>
                     <th scope="col">#User Id</th>
@@ -181,9 +194,9 @@ const NewUserList = () => {
           allNewUserData && allNewUserData.map((unData,index)=>{
               return(
                   <> 
-                  <tbody key={unData.id}>
+                  <tbody key={index}>
                    <tr>
-                      <th scope="row">{unData.id}</th>
+                      <th scope="row">{index + 1}</th>
                       <td>{unData.name}</td>
                       <td>{unData.phone}</td>
                       <td>{unData.email}</td>
