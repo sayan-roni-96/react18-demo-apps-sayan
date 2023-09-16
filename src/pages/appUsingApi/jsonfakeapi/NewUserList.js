@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import NewViewModal from './modals/NewViewModal';
 import NewEditModal from './modals/NewEditModal';
+import AddModal from './modals/AddModal';
 
  
 const NewUserList = () => {
@@ -12,6 +13,7 @@ const NewUserList = () => {
     const [newLoading, addNewLoading] = useState(false);
     const [newDatashow, setnewDatashow] = useState(false);
     const [newEditDatashow, setnewEditDatashow] = useState(false);
+    const [newAddDatashow, setnewAddDatashow] = useState(false);
     //const [edituserDetail, setedituserDetail] = useState();
     const [userDetail, setuserDetail] = useState();
     const [editUserId, setEditUserId] = useState(null);
@@ -19,6 +21,12 @@ const NewUserList = () => {
     const [editUserPhone, setEditUserPhone] = useState('');
     const [editUserEmail, setEditUserEmail] = useState('');
     const [editUserCity, setEditUserCity] = useState('')
+    const [addUserName, setaddUserName] = useState('');
+    const [addUserPhone, setaddUserPhone] = useState('');
+    const [addUserEmail, setaddUserEmail] = useState('');
+    //const [addUserCity, setaddUserCity] = useState('');
+
+    
  
     const getUserlist = ()=> {
         addNewLoading(true);
@@ -40,6 +48,24 @@ const NewUserList = () => {
 
     console.log('allNewUserData->',allNewUserData);
 
+    {/*this modal operation use for Add User  purpose*/ }
+    const addHandleClose = () => setnewAddDatashow(false);
+    //const handleShow = () => setnewDatashow(true);
+    
+      const addUser = ()=>{
+        const newUserAdd = {
+          id: Date.now(),
+          name: addUserName,
+          phone: addUserPhone,
+          email:addUserEmail,
+        }
+        setAllNewUserData([...allNewUserData,newUserAdd]);
+        setnewAddDatashow(true);
+        setaddUserName('');
+        setaddUserPhone('');
+        setaddUserEmail('');
+  }
+    
     
    {/*this modal operation use for view purpose*/ }
     const handleClose = () => setnewDatashow(false);
@@ -109,6 +135,13 @@ const NewUserList = () => {
 
   return (
     <div className='container'>
+      {/* Add data Modal*/}
+      <AddModal addUserPhone ={addUserPhone} setaddUserName = {setaddUserName} addUserName ={addUserName}
+      addHandleClose = {addHandleClose} newAddDatashow = {newAddDatashow} setaddUserPhone = {setaddUserPhone}
+      addUserEmail = {addUserEmail} setaddUserEmail = {setaddUserEmail} addUser = {addUser}
+     />
+     
+       {/* End Add data Modal*/}
       {/* view modal */}
       {/*this modal use for view purpose*/}
       <NewViewModal newDatashow = {newDatashow} handleClose = {handleClose} userDetail = {userDetail}/>
@@ -126,7 +159,7 @@ const NewUserList = () => {
        
         <h1>User List</h1>
          <div className="mb-4">
-           <button className="btn btn-primary">Add New User</button>{' '}
+           <button className="btn btn-primary" onClick={()=> addUser()}>Add New User</button>{' '}
          </div>
          {newLoading ? (
            <><Loaders /></>
@@ -140,7 +173,6 @@ const NewUserList = () => {
                     <th scope="col">Name </th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
-                    <th scope="col">City</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -154,7 +186,7 @@ const NewUserList = () => {
                       <td>{unData.name}</td>
                       <td>{unData.phone}</td>
                       <td>{unData.email}</td>
-                      <td>{unData.address.city}</td>
+                      {/* <td>{unData.address.city}</td> */}
                       <td>
                           <button className="btn btn-info" onClick={()=> showDataModal(unData)}>View</button>{' '}
                           <button className="btn btn-warning" onClick={() => showEditDataModal(unData)}>Edit</button>{' '}
