@@ -11,6 +11,8 @@ import SmallCounter from './pages/smallApps/SmallCounter';
 import SmallCalculator from './pages/smallApps/SmallCalculator';
 import UserList from './pages/appUsingApi/jsonfakeapi/UserList';
 import NewUserList from './pages/appUsingApi/jsonfakeapi/NewUserList';
+import UserListPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserListPage';
+import UserViewPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserViewPage';
 
 function App() {
   return (
@@ -27,6 +29,11 @@ function App() {
         {/* API Ops */}
         <Route exact path="/userlist" element={<UserList />} />
         <Route exact path="/newuserlist" element={<NewUserList />} />
+
+        {/* Without Modal */}
+        <Route exact path="/alluser" element={<UserListPage />} />
+        <Route exact path="/alluser/viewuser/:vid" element={<UserViewPage />} />
+
       </Routes>
     </div>
   );
