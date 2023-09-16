@@ -55,9 +55,9 @@ const AddModal = ({addUserPhone,setaddUserName,addUserName,addHandleClose,newAdd
                    </> 
       </Modal.Body>
       <Modal.Footer>
-        {/* <Button variant="secondary" onClick={handleClose}>
+        <Button variant="secondary" onClick={addHandleClose}>
           Close
-        </Button> */}
+        </Button>
         <Button variant="primary" onClick={addUser}>
          Save Changes
        </Button>

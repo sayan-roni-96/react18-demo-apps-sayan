@@ -37,7 +37,7 @@ const NewEditModal = ({newEditDatashow,editHandleClose,editUserName,setEditUserN
                      onChange={(ev) => setEditUserEmail(ev.target.value)}
                    />
                 </div>
-               <div className='editmodalinp'> City: <input
+               {/* <div className='editmodalinp'> City: <input
                      style={{ width: "50%", marginleft: '24px' }}
                      type="text"
                      className="form-control"
@@ -45,7 +45,7 @@ const NewEditModal = ({newEditDatashow,editHandleClose,editUserName,setEditUserN
                      value={editUserCity}
                      onChange={(ev) => setEditUserCity(ev.target.value)}
                    />
-                   </div>
+                   </div> */}
                    </>    
      </Modal.Body>
      <Modal.Footer>

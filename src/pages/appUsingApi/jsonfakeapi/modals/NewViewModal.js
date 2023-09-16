@@ -13,7 +13,7 @@ const NewViewModal = ({newDatashow,handleClose,userDetail}) => {
          <li> Name : {userDetail && userDetail.name}</li>
          <li> Phone : {userDetail && userDetail.phone}</li>
          <li> Email :{userDetail && userDetail.email}</li>
-         <li> City : {userDetail && userDetail.address.city}</li>
+         {/* <li> City : {userDetail && userDetail.address.city}</li> */}
        </ul>
      </Modal.Body>
      <Modal.Footer>

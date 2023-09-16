@@ -64,6 +64,7 @@ const NewUserList = () => {
         setaddUserName('');
         setaddUserPhone('');
         setaddUserEmail('');
+        // addHandleClose();
   }
     
     
