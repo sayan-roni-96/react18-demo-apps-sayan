@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Loaders from '../../../components/Loaders';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const UserListPage = () => {
    const navigate = useNavigate();
@@ -60,7 +60,8 @@ const UserListPage = () => {
 
       <h1>User List</h1>
       <div className="mb-4">
-        <button className="btn btn-primary">Add New User</button>{' '}
+        <button className="btn btn-primary" onClick = {()=>navigate('/alluser/adduser')} >Add New User</button>{' '}
+        <Link to="/alluser/adduser" className="btn btn-primary">Add New User Link</Link>
       </div>
       {isLoading ? (
         <>
