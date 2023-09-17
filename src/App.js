@@ -13,6 +13,7 @@ import UserList from './pages/appUsingApi/jsonfakeapi/UserList';
 import NewUserList from './pages/appUsingApi/jsonfakeapi/NewUserList';
 import UserListPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserListPage';
 import UserViewPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserViewPage';
+import UserEditPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserEditPage';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         {/* Without Modal */}
         <Route exact path="/alluser" element={<UserListPage />} />
         <Route exact path="/alluser/viewuser/:vid" element={<UserViewPage />} />
+        <Route exact path="/alluser/edituser/:eid" element={<UserEditPage />} />
 
       </Routes>
     </div>

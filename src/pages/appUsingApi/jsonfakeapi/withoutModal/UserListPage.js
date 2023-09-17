@@ -8,6 +8,7 @@ const UserListPage = () => {
   const [allUserData, setAllUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [viewSingleUser, setViewSingleUser] = useState({});
+  const [editSingleUser, setEditSingleUser] = useState({})
 
   const getAllUserData = () => {
     setIsLoading(true);
@@ -43,6 +44,16 @@ const UserListPage = () => {
     }
   };
   console.log('viewSingleUser==>', viewSingleUser);
+
+  //open page for edit purpose
+  const editUserDetail = (editUser)=> {
+        console.log('editUser=>', editUser);
+        if (editUser) {
+          navigate(`/alluser/edituser/${editUser.id}`)
+          setEditSingleUser(editUser);
+      }
+      console.log('editSingleUser->',editSingleUser);
+  }
 
   return (
     <div className="container">
@@ -86,7 +97,7 @@ const UserListPage = () => {
                       >
                         View
                       </button>{' '}
-                      <button className="btn btn-warning">Edit</button>{' '}
+                      <button className="btn btn-warning" onClick={() => editUserDetail(uData)}>Edit</button>{' '}
                       <button className="btn btn-danger">Delete</button>
                     </td>
                   </tr>
