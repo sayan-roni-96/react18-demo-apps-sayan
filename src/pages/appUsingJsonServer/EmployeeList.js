@@ -39,6 +39,22 @@ const EmployeeList = () => {
     });
   };
 
+  const deleteClick = (delEmp) => {
+    if (window.confirm('Do you want to delete?')) {
+      axios
+        .delete(`${process.env.REACT_APP_JSON_URL}/employee/${delEmp.id}`)
+        .then((delResp) => {
+          console.log('delete_success=>', delResp);
+          if (delResp.status == 200) {
+            getAllEmployee();
+          }
+        })
+        .catch((err) => {
+          console.log('delete_error=>', err);
+        });
+    }
+  };
+
   return (
     <div className="container mt-4">
       <div className="mb-4">
@@ -78,7 +94,12 @@ const EmployeeList = () => {
                       >
                         Edit
                       </Button>{' '}
-                      <Button variant="danger">Delete</Button>
+                      <Button
+                        variant="danger"
+                        onClick={() => deleteClick(eData)}
+                      >
+                        Delete
+                      </Button>
                     </td>
                   </tr>
                 </tbody>
