@@ -25,7 +25,10 @@ const MenuBar = () => {
                   New User List Fake Json Server
                 </Dropdown.Item>
                 <Dropdown.Item href="/alluser">
-                 All List Without Modal Fake Json Server
+                  All List Without Modal Fake Json Server
+                </Dropdown.Item>
+                <Dropdown.Item href="/employeelist">
+                  CRUD Using Json Server
                 </Dropdown.Item>
               </NavDropdown>
             </Nav>

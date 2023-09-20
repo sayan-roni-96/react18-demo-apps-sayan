@@ -1,0 +1,70 @@
+{
+  "employee": [
+    {
+      "employeename": "Alita Watson",
+      "email": "alisha@yahoo.com",
+      "phone": "98745468521",
+      "technology": [
+        {
+          "value": "angular",
+          "label": "Angular"
+        },
+        {
+          "value": "node",
+          "label": "Node"
+        },
+        {
+          "value": "react",
+          "label": "React"
+        }
+      ],
+      "gender": "female",
+      "active": true,
+      "id": "1"
+    },
+    {
+      "employeename": "John Vogan1",
+      "email": "john@yahoo.com",
+      "phone": "98745468521",
+      "technology": [
+        {
+          "value": "node",
+          "label": "Node"
+        }
+      ],
+      "gender": "male",
+      "active": false,
+      "id": "40e5a1ab-4d05-4512-bb13-bf6ce3995271"
+    },
+    {
+      "employeename": "Sayan Dutta",
+      "email": "sayan@yahoo.com",
+      "phone": "9784582147",
+      "id": "Uo0Mns7"
+    },
+    {
+      "id": "b9904bd2-abeb-439d-8f88-f0aee4efc755",
+      "employeename": "Ritam Das",
+      "email": "ritam@yahoo.com",
+      "phone": "9874584521"
+    },
+    {
+      "id": "bfb2cfe0-0c57-493d-9d88-ed11a80dd1bf",
+      "employeename": "Sujay Mandal",
+      "email": "sujay@yahoo.com",
+      "phone": "789945845"
+    },
+    {
+      "id": "2a826df7-c104-4750-9ab0-dc637b69ca7f",
+      "employeename": "Ritam Das",
+      "email": "ritam@yahoo.com",
+      "phone": "9874584521"
+    },
+    {
+      "id": "b7a38d6f-a62b-47bd-8d5e-4e38dd66113e",
+      "employeename": "Sujay Mandal",
+      "email": "sujay@yahoo.com",
+      "phone": "9874584521"
+    }
+  ]
+}

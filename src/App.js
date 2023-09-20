@@ -15,10 +15,12 @@ import UserListPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserListP
 import UserViewPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserViewPage';
 import UserEditPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserEditPage';
 import UserAddPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserAddPage';
+import EmployeeList from './pages/appUsingJsonServer/EmployeeList';
+import EmployeeAdd from './pages/appUsingJsonServer/EmployeeAdd';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App_class container mt-4">
       <h1>React18-New Applications</h1>
       <MenuBar />
       <Routes>
@@ -38,6 +40,9 @@ function App() {
         <Route exact path="/alluser/edituser/:eid" element={<UserEditPage />} />
         <Route exact path="/alluser/adduser" element={<UserAddPage />} />
 
+        {/* Using Json Server */}
+        <Route exact path="/employeelist" element={<EmployeeList />} />
+        <Route exact path="/employeeadd" element={<EmployeeAdd />} />
       </Routes>
     </div>
   );
