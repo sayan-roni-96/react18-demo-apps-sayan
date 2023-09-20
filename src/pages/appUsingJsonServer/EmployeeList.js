@@ -2,9 +2,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import Loaders from '../components/Loaders';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const EmployeeList = () => {
+  const navigate = useNavigate();
   const [allEmployee, setAllEmployee] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
   const getAllEmployee = () => {
@@ -31,6 +32,12 @@ const EmployeeList = () => {
       getAllEmployee();
     };
   }, []);
+
+  const editClick = (empData) => {
+    navigate(`/employeeedit/${empData.id}`, {
+      state: { singledata: empData },
+    });
+  };
 
   return (
     <div className="container mt-4">
@@ -65,8 +72,13 @@ const EmployeeList = () => {
                     <td>{eData.phone}</td>
                     <td>
                       <Button variant="success">View</Button>{' '}
-                      <Button variant="warning">Edit</Button>{' '}
-                      <Button variant="danger">Danger</Button>
+                      <Button
+                        variant="warning"
+                        onClick={() => editClick(eData)}
+                      >
+                        Edit
+                      </Button>{' '}
+                      <Button variant="danger">Delete</Button>
                     </td>
                   </tr>
                 </tbody>

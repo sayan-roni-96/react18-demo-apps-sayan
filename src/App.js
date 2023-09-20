@@ -17,6 +17,7 @@ import UserEditPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserEditP
 import UserAddPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserAddPage';
 import EmployeeList from './pages/appUsingJsonServer/EmployeeList';
 import EmployeeAdd from './pages/appUsingJsonServer/EmployeeAdd';
+import EmployeeEdit from './pages/appUsingJsonServer/EmployeeEdit';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         {/* Using Json Server */}
         <Route exact path="/employeelist" element={<EmployeeList />} />
         <Route exact path="/employeeadd" element={<EmployeeAdd />} />
+        <Route exact path="/employeeedit/:empid" element={<EmployeeEdit />} />
       </Routes>
     </div>
   );
