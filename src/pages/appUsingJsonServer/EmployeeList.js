@@ -39,6 +39,13 @@ const EmployeeList = () => {
     });
   };
 
+  const viewClick = (vData) => {
+     navigate(`/employeedetails/${vData.id}`, {
+       state: { singledata: vData },
+     });
+    console.log('vData=>',vData);
+  };
+
   const deleteClick = (delEmp) => {
     if (window.confirm('Do you want to delete?')) {
       axios
@@ -87,7 +94,7 @@ const EmployeeList = () => {
                     <td>{eData.email}</td>
                     <td>{eData.phone}</td>
                     <td>
-                      <Button variant="success">View</Button>{' '}
+                      <Button variant="success" onClick={() => viewClick(eData)}>View</Button>{' '}
                       <Button
                         variant="warning"
                         onClick={() => editClick(eData)}
