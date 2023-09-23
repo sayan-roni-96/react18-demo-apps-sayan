@@ -40,10 +40,10 @@ const EmployeeList = () => {
   };
 
   const viewClick = (vData) => {
-     navigate(`/employeedetails/${vData.id}`, {
-       state: { singledata: vData },
-     });
-    console.log('vData=>',vData);
+    navigate(`/employeedetails/${vData.id}`, {
+      state: { singledata: vData },
+    });
+    console.log('vData=>', vData);
   };
 
   const deleteClick = (delEmp) => {
@@ -80,6 +80,7 @@ const EmployeeList = () => {
               <th>#</th>
               <th>Employee Name </th>
               <th>Email</th>
+              <th>Gender</th>
               <th>Phone</th>
               <th>Action</th>
             </tr>
@@ -92,9 +93,15 @@ const EmployeeList = () => {
                     <td>{index + 1}</td>
                     <td>{eData.employeename}</td>
                     <td>{eData.email}</td>
+                    <td>{eData.gender}</td>
                     <td>{eData.phone}</td>
                     <td>
-                      <Button variant="success" onClick={() => viewClick(eData)}>View</Button>{' '}
+                      <Button
+                        variant="success"
+                        onClick={() => viewClick(eData)}
+                      >
+                        View
+                      </Button>{' '}
                       <Button
                         variant="warning"
                         onClick={() => editClick(eData)}

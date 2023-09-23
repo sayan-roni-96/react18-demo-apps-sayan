@@ -10,6 +10,7 @@ const EmployeeAdd = () => {
     empName: '',
     empEmail: '',
     empPhone: '',
+    empGender: '',
   });
 
   const [errorMsg, setErrorMsg] = useState('');
@@ -19,7 +20,8 @@ const EmployeeAdd = () => {
     if (
       !employeeAddField.empName ||
       !employeeAddField.empEmail ||
-      !employeeAddField.empPhone
+      !employeeAddField.empPhone ||
+      !employeeAddField.empGender
     ) {
       setErrorMsg('Please fill all fields');
       setTimeout(() => {
@@ -31,6 +33,7 @@ const EmployeeAdd = () => {
         employeename: employeeAddField.empName,
         email: employeeAddField.empEmail,
         phone: employeeAddField.empPhone,
+        gender: employeeAddField.empGender,
       };
       axios
         .post(`${process.env.REACT_APP_JSON_URL}/employee`, newData)
@@ -50,6 +53,8 @@ const EmployeeAdd = () => {
         });
     }
   };
+
+  console.log('empGender=>', employeeAddField.empGender);
 
   return (
     <div className="container mt-4">
@@ -102,37 +107,43 @@ const EmployeeAdd = () => {
             </InputGroup>
           </Form.Group>
         </Row>
-        {/* <Row className="mb-3">
-          <Form.Group as={Col} md="6" controlId="validationCustom03">
-            <Form.Label>City</Form.Label>
-            <Form.Control type="text" placeholder="City"  />
-            <Form.Control.Feedback type="invalid">
+        <Row className="mb-3">
+          <Form.Group as={Col} md="3" controlId="validationCustom03">
+            <Form.Label>Gender</Form.Label>
+            <Form.Select
+              aria-label="Default select example"
+              value={employeeAddField.empGender}
+              onChange={(e) => {
+                setEmployeeAddField({
+                  ...employeeAddField,
+                  empGender: e.target.value,
+                });
+              }}
+            >
+              <option value="">--Select One--</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Others">Others</option>
+            </Form.Select>
+            {/* <Form.Control.Feedback type="invalid">
               Please provide a valid city.
-            </Form.Control.Feedback>
+            </Form.Control.Feedback> */}
           </Form.Group>
-          <Form.Group as={Col} md="3" controlId="validationCustom04">
+          {/* <Form.Group as={Col} md="3" controlId="validationCustom04">
             <Form.Label>State</Form.Label>
-            <Form.Control type="text" placeholder="State"  />
+            <Form.Control type="text" placeholder="State" />
             <Form.Control.Feedback type="invalid">
               Please provide a valid state.
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group as={Col} md="3" controlId="validationCustom05">
             <Form.Label>Zip</Form.Label>
-            <Form.Control type="text" placeholder="Zip"  />
+            <Form.Control type="text" placeholder="Zip" />
             <Form.Control.Feedback type="invalid">
               Please provide a valid zip.
             </Form.Control.Feedback>
-          </Form.Group>
-        </Row> */}
-        {/* <Form.Group className="mb-3">
-          <Form.Check
-            
-            label="Agree to terms and conditions"
-            feedback="You must agree before submitting."
-            feedbackType="invalid"
-          />
-        </Form.Group> */}
+          </Form.Group> */}
+        </Row>
         <Button type="submit">Submit form</Button>{' '}
         <Link className="btn btn-secondary" to={'/employeelist'}>
           Go Back
