@@ -59,7 +59,7 @@ const StudentList = () => {
   return (
     <div className="container mt-4">
         <div className="mb-4">
-        <Link className="btn btn-primary" to={'/employeeadd'}>
+        <Link className="btn btn-primary" to={'/studentadd'}>
           Add Student
         </Link>
       </div>
