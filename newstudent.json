@@ -1,0 +1,28 @@
+{
+  "student": [
+    {
+      "id": "b978904bd2-abeb-439d-8f88-f0aee4efc755",
+      "studentname": "Ron Das",
+      "favsubject": "Physical Science",
+      "age": "13"
+    },
+    {
+      "id": "987646jk-1122-4f95-b4f0-76c86c137698",
+      "studentname": "Tom Das",
+      "favsubject": "Bengali",
+      "age": "10"
+    },
+    {
+      "id": "8754hjy-1122-4f95-b4f0-76c86c137698",
+      "studentname": "Pom dey",
+      "favsubject": "English",
+      "age": "10"
+    },
+    {
+      "id": "987646jk-1122-4f95-b4f0-76c86c137698",
+      "studentname": "Roy Kane",
+      "favsubject": "Sankrit",
+      "age": "15"
+    }
+  ]
+}

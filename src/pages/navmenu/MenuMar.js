@@ -30,6 +30,9 @@ const MenuBar = () => {
                 <Dropdown.Item href="/employeelist">
                   CRUD Using Json Server
                 </Dropdown.Item>
+                <Dropdown.Item href="/studentlist">
+                  CRUD Student Using Json Server
+                </Dropdown.Item>
               </NavDropdown>
             </Nav>
           </Container>

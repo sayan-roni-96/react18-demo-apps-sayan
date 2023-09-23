@@ -22,6 +22,7 @@
     "start": "react-scripts start",
     "on": "react-scripts --openssl-legacy-provider start",
     "dev": "concurrently \"react-scripts start\" \"json-server --watch db.json --port 3079\"",
+    "nom": "concurrently \"react-scripts start\" \"json-server --watch newstudent.json --port 3080\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
