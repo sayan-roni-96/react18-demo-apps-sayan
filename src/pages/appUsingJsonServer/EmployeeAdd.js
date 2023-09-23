@@ -14,6 +14,7 @@ const EmployeeAdd = () => {
     empPhone: '',
     empGender: '',
     empDetails: '',
+    empPerformance: 'Good',
   });
 
   const [errorMsg, setErrorMsg] = useState('');
@@ -42,6 +43,8 @@ const EmployeeAdd = () => {
         phone: employeeAddField.empPhone,
         gender: employeeAddField.empGender,
         details: employeeAddField.empDetails,
+        details: employeeAddField.empDetails,
+        performance: employeeAddField.empPerformance,
       };
       axios
         .post(`${process.env.REACT_APP_JSON_URL}/employee`, newData)
@@ -67,7 +70,7 @@ const EmployeeAdd = () => {
     }
   };
 
-  console.log('empGender=>', employeeAddField.empDetails);
+  console.log('empPerformance=>', employeeAddField.empPerformance);
 
   return (
     <div className="container mt-4">
@@ -122,23 +125,6 @@ const EmployeeAdd = () => {
           </Form.Group>
         </Row>
         <Row className="mb-3">
-          <Form.Group as={Col} md="12" controlId="validationCustom04">
-            <Form.Label>Employee Details</Form.Label>
-            <Form.Control
-              as="textarea"
-              placeholder="Type here..."
-              style={{ height: '100px' }}
-              value={employeeAddField.empDetails}
-              onChange={(e) => {
-                setEmployeeAddField({
-                  ...employeeAddField,
-                  empDetails: e.target.value,
-                });
-              }}
-            />
-          </Form.Group>
-        </Row>
-        <Row className="mb-3">
           <Form.Group as={Col} md="3" controlId="validationCustom03">
             <Form.Label>Gender</Form.Label>
             <Form.Select
@@ -156,14 +142,88 @@ const EmployeeAdd = () => {
               <option value="Others">Others</option>
             </Form.Select>
           </Form.Group>
-          {/*
-          <Form.Group as={Col} md="3" controlId="validationCustom05">
-            <Form.Label>Zip</Form.Label>
-            <Form.Control type="text" placeholder="Zip" />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid zip.
-            </Form.Control.Feedback>
-          </Form.Group> */}
+          <Form.Group as={Col} md="4" controlId="validationCustom03">
+            <Form.Label>Employee Performence</Form.Label>
+            <Form.Group>
+              <label className="form-check-label">Good</label>{' '}
+              <input
+                className="form-check-input"
+                type="radio"
+                value="Good"
+                checked={
+                  employeeAddField.empPerformance === 'Good' ? true : false
+                }
+                onChange={(e) => {
+                  setEmployeeAddField({
+                    ...employeeAddField,
+                    empPerformance: e.target.value,
+                  });
+                }}
+              />{' '}
+              <label className="form-check-label">Better</label>{' '}
+              <input
+                className="form-check-input"
+                type="radio"
+                value="Better"
+                checked={
+                  employeeAddField.empPerformance === 'Better' ? true : false
+                }
+                onChange={(e) => {
+                  setEmployeeAddField({
+                    ...employeeAddField,
+                    empPerformance: e.target.value,
+                  });
+                }}
+              />{' '}
+              <label className="form-check-label">Best</label>{' '}
+              <input
+                className="form-check-input"
+                type="radio"
+                value="Best"
+                checked={
+                  employeeAddField.empPerformance === 'Best' ? true : false
+                }
+                onChange={(e) => {
+                  setEmployeeAddField({
+                    ...employeeAddField,
+                    empPerformance: e.target.value,
+                  });
+                }}
+              />{' '}
+              <label className="form-check-label">Worst</label>{' '}
+              <input
+                className="form-check-input"
+                type="radio"
+                value="Worst"
+                checked={
+                  employeeAddField.empPerformance === 'Worst' ? true : false
+                }
+                onChange={(e) => {
+                  setEmployeeAddField({
+                    ...employeeAddField,
+                    empPerformance: e.target.value,
+                  });
+                }}
+              />{' '}
+            </Form.Group>
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col} md="12" controlId="validationCustom04">
+            <Form.Label>Employee Details</Form.Label>
+            <Form.Control
+              as="textarea"
+              placeholder="Type here..."
+              style={{ height: '100px' }}
+              value={employeeAddField.empDetails}
+              onChange={(e) => {
+                setEmployeeAddField({
+                  ...employeeAddField,
+                  empDetails: e.target.value,
+                });
+              }}
+            />
+          </Form.Group>
         </Row>
         <Button type="submit">Submit form</Button>{' '}
         <Link className="btn btn-secondary" to={'/employeelist'}>

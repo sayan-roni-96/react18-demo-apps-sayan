@@ -82,6 +82,7 @@ const EmployeeList = () => {
               <th>Email</th>
               <th>Gender</th>
               <th>Phone</th>
+              <th>Performance</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -95,6 +96,20 @@ const EmployeeList = () => {
                     <td>{eData.email}</td>
                     <td>{eData.gender}</td>
                     <td>{eData.phone}</td>
+                    <td
+                      style={{
+                        color:
+                          eData.performance == 'Good'
+                            ? '#03c2fc'
+                            : eData.performance == 'Better'
+                            ? 'green'
+                            : eData.performance == 'Worst'
+                            ? 'red'
+                            : 'yellow',
+                      }}
+                    >
+                      {eData.performance}
+                    </td>
                     <td>
                       <Button
                         variant="success"
