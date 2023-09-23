@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 import React, { useState } from 'react';
 import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import ToastMessage from '../components/ToastMessage';
 
 const EmployeeAdd = () => {
   const navigate = useNavigate();
@@ -23,7 +25,10 @@ const EmployeeAdd = () => {
       !employeeAddField.empPhone ||
       !employeeAddField.empGender
     ) {
-      setErrorMsg('Please fill all fields');
+      // setErrorMsg('Please fill all fields');
+      toast.error('Please fill all fields!', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
       setTimeout(() => {
         setErrorMsg('');
       }, 2000);
@@ -40,12 +45,17 @@ const EmployeeAdd = () => {
         .then((resp) => {
           console.log('resp=>', resp);
           if (resp.status == 201) {
-            setEmployeeAddField({
-              empName: '',
-              empEmail: '',
-              empPhone: '',
+            toast.success('New employee created!', {
+              position: toast.POSITION.TOP_RIGHT,
             });
-            navigate('/employeelist');
+            setTimeout(() => {
+              setEmployeeAddField({
+                empName: '',
+                empEmail: '',
+                empPhone: '',
+              });
+              navigate('/employeelist');
+            }, 1000);
           }
         })
         .catch((err) => {
@@ -58,6 +68,7 @@ const EmployeeAdd = () => {
 
   return (
     <div className="container mt-4">
+      <ToastMessage />
       <Form onSubmit={employeeSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="validationCustom01">
@@ -111,7 +122,6 @@ const EmployeeAdd = () => {
           <Form.Group as={Col} md="3" controlId="validationCustom03">
             <Form.Label>Gender</Form.Label>
             <Form.Select
-              aria-label="Default select example"
               value={employeeAddField.empGender}
               onChange={(e) => {
                 setEmployeeAddField({

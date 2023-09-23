@@ -11,12 +11,31 @@ const EmployeeEdit = () => {
   const { state } = useLocation();
   console.log('state=>', state);
 
+  const genderData = [
+    {
+      id: 1,
+      name: 'Male',
+      value: 'Male',
+    },
+    {
+      id: 2,
+      name: 'Female',
+      value: 'Female',
+    },
+    {
+      id: 3,
+      name: 'Others',
+      value: 'Others',
+    },
+  ];
+
   const navigate = useNavigate();
 
   const [employeeEditField, setEmployeeEditField] = useState({
     empName: state.singledata.employeename || '',
     empEmail: state.singledata.email || '',
     empPhone: state.singledata.phone || '',
+    empGender: state.singledata.gender || '',
   });
 
   const [errorMsg, setErrorMsg] = useState('');
@@ -26,7 +45,8 @@ const EmployeeEdit = () => {
     if (
       !employeeEditField.empName ||
       !employeeEditField.empEmail ||
-      !employeeEditField.empPhone
+      !employeeEditField.empPhone ||
+      !employeeEditField.empGender
     ) {
       setErrorMsg('Please fill all fields');
       setTimeout(() => {
@@ -37,6 +57,7 @@ const EmployeeEdit = () => {
         employeename: employeeEditField.empName,
         email: employeeEditField.empEmail,
         phone: employeeEditField.empPhone,
+        gender: employeeEditField.empGender,
       };
 
       axios
@@ -55,6 +76,8 @@ const EmployeeEdit = () => {
         });
     }
   };
+
+  console.log('employeeEditField.empGender=>', employeeEditField.empGender);
 
   return (
     <div className="container mt-4">
@@ -107,37 +130,46 @@ const EmployeeEdit = () => {
             </InputGroup>
           </Form.Group>
         </Row>
-        {/* <Row className="mb-3">
-          <Form.Group as={Col} md="6" controlId="validationCustom03">
-            <Form.Label>City</Form.Label>
-            <Form.Control type="text" placeholder="City"  />
-            <Form.Control.Feedback type="invalid">
+        <Row className="mb-3">
+          <Form.Group as={Col} md="3" controlId="validationCustom03">
+            <Form.Label>Gender</Form.Label>
+            <Form.Select
+              value={employeeEditField.empGender}
+              onChange={(e) => {
+                setEmployeeEditField({
+                  ...employeeEditField,
+                  empGender: e.target.value,
+                });
+              }}
+            >
+              <option value="">--Select One--</option>
+              {genderData.map((gData, i) => {
+                return (
+                  <option key={gData.id} value={gData.value}>
+                    {gData.name}
+                  </option>
+                );
+              })}
+            </Form.Select>
+            {/* <Form.Control.Feedback type="invalid">
               Please provide a valid city.
-            </Form.Control.Feedback>
+            </Form.Control.Feedback> */}
           </Form.Group>
-          <Form.Group as={Col} md="3" controlId="validationCustom04">
+          {/* <Form.Group as={Col} md="3" controlId="validationCustom04">
             <Form.Label>State</Form.Label>
-            <Form.Control type="text" placeholder="State"  />
+            <Form.Control type="text" placeholder="State" />
             <Form.Control.Feedback type="invalid">
               Please provide a valid state.
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group as={Col} md="3" controlId="validationCustom05">
             <Form.Label>Zip</Form.Label>
-            <Form.Control type="text" placeholder="Zip"  />
+            <Form.Control type="text" placeholder="Zip" />
             <Form.Control.Feedback type="invalid">
               Please provide a valid zip.
             </Form.Control.Feedback>
-          </Form.Group>
-        </Row> */}
-        {/* <Form.Group className="mb-3">
-          <Form.Check
-            
-            label="Agree to terms and conditions"
-            feedback="You must agree before submitting."
-            feedbackType="invalid"
-          />
-        </Form.Group> */}
+          </Form.Group> */}
+        </Row>
         <Button type="submit">Save form</Button>{' '}
         <Link className="btn btn-secondary" to={'/employeelist'}>
           Go Back
