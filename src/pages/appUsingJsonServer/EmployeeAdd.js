@@ -13,6 +13,7 @@ const EmployeeAdd = () => {
     empEmail: '',
     empPhone: '',
     empGender: '',
+    empDetails: '',
   });
 
   const [errorMsg, setErrorMsg] = useState('');
@@ -23,7 +24,8 @@ const EmployeeAdd = () => {
       !employeeAddField.empName ||
       !employeeAddField.empEmail ||
       !employeeAddField.empPhone ||
-      !employeeAddField.empGender
+      !employeeAddField.empGender ||
+      !employeeAddField.empDetails
     ) {
       // setErrorMsg('Please fill all fields');
       toast.error('Please fill all fields!', {
@@ -39,6 +41,7 @@ const EmployeeAdd = () => {
         email: employeeAddField.empEmail,
         phone: employeeAddField.empPhone,
         gender: employeeAddField.empGender,
+        details: employeeAddField.empDetails,
       };
       axios
         .post(`${process.env.REACT_APP_JSON_URL}/employee`, newData)
@@ -64,7 +67,7 @@ const EmployeeAdd = () => {
     }
   };
 
-  console.log('empGender=>', employeeAddField.empGender);
+  console.log('empGender=>', employeeAddField.empDetails);
 
   return (
     <div className="container mt-4">
@@ -119,6 +122,23 @@ const EmployeeAdd = () => {
           </Form.Group>
         </Row>
         <Row className="mb-3">
+          <Form.Group as={Col} md="12" controlId="validationCustom04">
+            <Form.Label>Employee Details</Form.Label>
+            <Form.Control
+              as="textarea"
+              placeholder="Type here..."
+              style={{ height: '100px' }}
+              value={employeeAddField.empDetails}
+              onChange={(e) => {
+                setEmployeeAddField({
+                  ...employeeAddField,
+                  empDetails: e.target.value,
+                });
+              }}
+            />
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
           <Form.Group as={Col} md="3" controlId="validationCustom03">
             <Form.Label>Gender</Form.Label>
             <Form.Select
@@ -135,17 +155,8 @@ const EmployeeAdd = () => {
               <option value="Female">Female</option>
               <option value="Others">Others</option>
             </Form.Select>
-            {/* <Form.Control.Feedback type="invalid">
-              Please provide a valid city.
-            </Form.Control.Feedback> */}
           </Form.Group>
-          {/* <Form.Group as={Col} md="3" controlId="validationCustom04">
-            <Form.Label>State</Form.Label>
-            <Form.Control type="text" placeholder="State" />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid state.
-            </Form.Control.Feedback>
-          </Form.Group>
+          {/*
           <Form.Group as={Col} md="3" controlId="validationCustom05">
             <Form.Label>Zip</Form.Label>
             <Form.Control type="text" placeholder="Zip" />
