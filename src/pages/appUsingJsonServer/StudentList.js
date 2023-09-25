@@ -47,6 +47,15 @@ const StudentList = () => {
     }
   };
 
+  // student edit data
+  const editSClick = (esData)=>{
+    navigate(`/studentedit/${esData.id}`, {
+      state: { studata: esData },
+    });
+    console.log('esData =>', esData);
+
+  }
+
   //view Student Data
   const viewSClick = (vsData) => {
     navigate(`/studentview/${vsData.id}`, {
@@ -101,7 +110,7 @@ const StudentList = () => {
                     >
                       View
                     </Button>{' '}
-                    <Button variant="success">Edit</Button>{' '}
+                    <Button variant="success" onClick={() => editSClick(sData)}>Edit</Button>{' '}
                     <Button variant="warning" onClick={() => delClick(sData)}>
                       Delete
                     </Button>{' '}

@@ -22,6 +22,7 @@ import EmployeeDetails from './pages/appUsingJsonServer/EmployeeDetails';
 import StudentList from './pages/appUsingJsonServer/StudentList';
 import StudentView from './pages/appUsingJsonServer/StudentView';
 import StudentAdd from './pages/appUsingJsonServer/StudentAdd';
+import StudentEdit from './pages/appUsingJsonServer/StudentEdit';
 
 function App() {
   return (
@@ -54,6 +55,8 @@ function App() {
         <Route exact path="/studentlist" element={<StudentList />} />
         <Route path="/studentview/:id" element={<StudentView />} />
         <Route exact path="/studentadd" element={<StudentAdd />} />
+        <Route exact path="/studentedit/:stuid" element={<StudentEdit />} />
+
       </Routes>
     </div>
   );
