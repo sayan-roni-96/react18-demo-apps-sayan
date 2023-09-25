@@ -68,6 +68,7 @@ const StudentList = () => {
             <th>Student Name</th>
             <th>Age</th>
             <th>Fav Subject</th>
+            <th>Gender</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -80,6 +81,19 @@ const StudentList = () => {
                   <td>{sData.studentname}</td>
                   <td>{sData.age}</td>
                   <td>{sData.favsubject}</td>
+                  <td>{sData.gender}</td>
+                  <td style={{
+                        color:
+                         sData.performance == 'Outstanding'
+                            ? '#03c2fc'
+                            : sData.performance == 'Excellent'
+                            ? '#3498db'
+                            : sData.performance == 'Good'
+                            ? '#f1c40f'
+                            : sData.performance == 'Poor'
+                            ? '#e74c3c'
+                            : '#18db55'
+                      }}>{sData.performance}</td>
                   <td>
                     <Button
                       variant="secondary"

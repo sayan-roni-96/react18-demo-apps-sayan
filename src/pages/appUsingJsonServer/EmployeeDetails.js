@@ -1,6 +1,6 @@
 // EmployeeDetails.js
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 const EmployeeDetails = () => {
     const location=useLocation()
  const { singledata } = location.state;
@@ -19,6 +19,9 @@ const EmployeeDetails = () => {
       <div>
         <strong>Phone:</strong> {singledata.phone}
       </div>
+      <Link className="btn btn-primary" to={'/employeelist'}>
+          Go Back
+        </Link>
       {/* You can display more employee details here */}
     </div>
   );

@@ -20,6 +20,15 @@ const StudentView = () => {
                 <strong>Favourite Subject:</strong> {singledata.favsubject}
             </div>
             <div>
+                <strong>Gender:</strong> {singledata.gender}
+            </div>
+            <div>
+                <strong>Performance:</strong> {singledata.performance}
+            </div>
+            <div>
+                <strong>Details:</strong> {singledata.details}
+            </div>
+            <div>
             <Link className="btn btn-primary" to={'/studentlist'}>
           Go Back
         </Link>
