@@ -50,7 +50,7 @@ const StudentList = () => {
   // student edit data
   const editSClick = (esData)=>{
     navigate(`/studentedit/${esData.id}`, {
-      state: { studata: esData },
+       state: { stuData: esData },
     });
     console.log('esData =>', esData);
 

@@ -23,43 +23,43 @@ const StudentAdd = () => {
     const studentSubmit = (e) => {
       e.preventDefault();
        // Validation for name (only text)
-    const nameRegex = /^[A-Za-z\s]+$/;
-    if (!nameRegex.test(studentAddField.stuName)) {
-      toast.error('Name must contain only letters and spaces', {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      //setErrorMsg('Name must contain only letters and spaces');
-      setTimeout(() => {
-        setErrorMsg('');
-      }, 2000);
-      return;
-    }
+            const nameRegex = /^[A-Za-z\s]+$/;
+            if (!nameRegex.test(studentAddField.stuName)) {
+              toast.error('Name must contain only letters and spaces', {
+                position: toast.POSITION.TOP_RIGHT,
+              });
+              //setErrorMsg('Name must contain only letters and spaces');
+              setTimeout(() => {
+                setErrorMsg('');
+              }, 2000);
+              return;
+            }
 
-    // Validation for age (only numbers)
-    const ageRegex = /^[0-9]+$/;
-    if (!ageRegex.test(studentAddField.stuAge)) {
-      toast.error('Age must contain only numbers', {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      //setErrorMsg('Age must contain only numbers');
-      setTimeout(() => {
-        setErrorMsg('');
-      }, 2000);
-      return;
-    }
+       // Validation for age (only numbers)
+            const ageRegex = /^[0-9]+$/;
+             if (!ageRegex.test(studentAddField.stuAge)) {
+              toast.error('Age must contain only numbers', {
+                position: toast.POSITION.TOP_RIGHT,
+              });
+              //setErrorMsg('Age must contain only numbers');
+              setTimeout(() => {
+                setErrorMsg('');
+              }, 2000);
+              return;
+            }
 
-    // Validation for text area length
-    if (studentAddField.stuDetails.split(/\s+/).length < 20 ||
-        studentAddField.stuDetails.split(/\s+/).length > 200) {
-      toast.error('Student Details should be between 20 and 200 words.', {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      //setErrorMsg('Student Details should not exceed 200 characters');
-      setTimeout(() => {
-        setErrorMsg('');
-      }, 2000);
-      return;
-    }
+              // Validation for text area length
+              if (studentAddField.stuDetails.split(/\s+/).length < 20 ||
+                  studentAddField.stuDetails.split(/\s+/).length > 200) {
+                toast.error('Student Details should be between 20 and 200 words.', {
+                  position: toast.POSITION.TOP_RIGHT,
+                });
+                //setErrorMsg('Student Details should not exceed 200 characters');
+                setTimeout(() => {
+                  setErrorMsg('');
+                }, 2000);
+                return;
+              }
       if (
         !studentAddField.stuName ||
         !studentAddField.stuAge ||
@@ -69,11 +69,10 @@ const StudentAdd = () => {
         !studentAddField.stuDetails
       ) {
         //setErrorMsg('Please fill all fields');
-        toast.error('Please fill all fields!', {
-          position: toast.POSITION.TOP_RIGHT,
-        });
         setTimeout(() => {
-          setErrorMsg('');
+          toast.error('Please fill all fields!', {
+            position: toast.POSITION.TOP_RIGHT,
+          });
         }, 2000);
       } else {
         const newStudentData = {
@@ -102,11 +101,9 @@ const StudentAdd = () => {
                   stuGender:'',
                   studentPerformance:'',
                   stuDetails:''
-                });
-                navigate('/studentlist');
-                
+                });             
               }, 2000);
-                
+              navigate('/studentlist');   
             }
           })
           .catch((err) => {
