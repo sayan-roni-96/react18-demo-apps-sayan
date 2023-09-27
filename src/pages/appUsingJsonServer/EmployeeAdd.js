@@ -6,6 +6,8 @@ import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Link, useNavigate } from 'react-router-dom';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import ToastMessage from '../components/ToastMessage';
 
 const EmployeeAdd = () => {
@@ -19,6 +21,8 @@ const EmployeeAdd = () => {
     empPerformance: 'Good',
     technology: [],
   });
+
+  const [employeeFullDetails, setEmployeeFullDetails] = useState('');
 
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -49,6 +53,7 @@ const EmployeeAdd = () => {
         details: employeeAddField.empDetails,
         performance: employeeAddField.empPerformance,
         technology: employeeAddField.technology,
+        fulldetails: employeeFullDetails,
       };
       axios
         .post(`${process.env.REACT_APP_JSON_URL}/employee`, newData)
@@ -90,7 +95,7 @@ const EmployeeAdd = () => {
       technology: [...techData],
     });
   };
-  console.log('technology=>', employeeAddField.technology);
+  console.log('employeeFullDetails=>', employeeFullDetails);
 
   return (
     <div className="container mt-4">
@@ -254,6 +259,16 @@ const EmployeeAdd = () => {
                   empDetails: e.target.value,
                 });
               }}
+            />
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col} md="12" controlId="validationCustom04">
+            <Form.Label>Employee full details</Form.Label>
+            <ReactQuill
+              theme="snow"
+              value={employeeFullDetails}
+              onChange={setEmployeeFullDetails}
             />
           </Form.Group>
         </Row>

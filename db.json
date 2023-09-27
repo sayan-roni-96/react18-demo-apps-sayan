@@ -13,30 +13,24 @@
           "value": "node",
           "label": "Node"
         }
-      ]
+      ],
+      "fulldetails": "used to demonstrate the visual form of a"
     },
     {
-      "id": "13519d0c-4319-4a9b-a339-a89e22b3a227",
-      "employeename": "Sujay Mandal1",
-      "email": "sujay@yahoo.com",
-      "phone": "11194584578",
-      "gender": "Male",
-      "details": "Versions of the Lorem ipsum text have been used in typesetting at least since the 1960s, when it was popularized by advertisements for Letraset transfer sheets.[1] Lorem ipsum was introduced to the digital world in the mid-1980s, when Aldus employed it in graphic and word-processing templates for its desktop publishing program PageMaker. ",
-      "performance": "Better",
+      "id": "5a1b6c1b-41d2-4ae0-8fec-054f26da5c38",
+      "employeename": "Priya Das",
+      "email": "priya@test.com",
+      "phone": "9874584521",
+      "gender": "Female",
+      "details": "used to demonstrate the visual form of a used to demonstrate the visual form of a used to demonstrate the visual form of a used to demonstrate the visual form of a ",
+      "performance": "Good",
       "technology": [
-        {
-          "value": "angular",
-          "label": "Angular"
-        },
-        {
-          "value": "node",
-          "label": "Node"
-        },
         {
           "value": "react",
           "label": "React"
         }
-      ]
+      ],
+      "fulldetails": "<p><strong style=\"color: rgb(32, 33, 34);\">used to demonstrate the visual form of a&nbsp;</strong></p>"
     }
   ]
 }

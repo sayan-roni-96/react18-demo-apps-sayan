@@ -4,6 +4,8 @@ import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const EmployeeEdit = () => {
   const { empid } = useParams();
@@ -43,6 +45,10 @@ const EmployeeEdit = () => {
 
   const [errorMsg, setErrorMsg] = useState('');
 
+  const [employeeFullDetails, setEmployeeFullDetails] = useState(
+    state.singledata.fulldetails || ''
+  );
+
   const employeeSubmit = (e) => {
     e.preventDefault();
     if (
@@ -62,6 +68,7 @@ const EmployeeEdit = () => {
         phone: employeeEditField.empPhone,
         gender: employeeEditField.empGender,
         technology: employeeEditField.technology,
+        fulldetails: employeeFullDetails,
       };
 
       axios
@@ -183,6 +190,16 @@ const EmployeeEdit = () => {
               components={animatedComponents}
               value={employeeEditField.technology}
               onChange={(option) => onChangeSelect(option)}
+            />
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col} md="12" controlId="validationCustom04">
+            <Form.Label>Employee full details</Form.Label>
+            <ReactQuill
+              theme="snow"
+              value={employeeFullDetails}
+              onChange={setEmployeeFullDetails}
             />
           </Form.Group>
         </Row>
