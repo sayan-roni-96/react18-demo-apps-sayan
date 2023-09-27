@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
 import React, { useState } from 'react';
 import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 import { Link, useNavigate } from 'react-router-dom';
 import ToastMessage from '../components/ToastMessage';
 
@@ -15,6 +17,7 @@ const EmployeeAdd = () => {
     empGender: '',
     empDetails: '',
     empPerformance: 'Good',
+    technology: [],
   });
 
   const [errorMsg, setErrorMsg] = useState('');
@@ -45,6 +48,7 @@ const EmployeeAdd = () => {
         details: employeeAddField.empDetails,
         details: employeeAddField.empDetails,
         performance: employeeAddField.empPerformance,
+        technology: employeeAddField.technology,
       };
       axios
         .post(`${process.env.REACT_APP_JSON_URL}/employee`, newData)
@@ -70,7 +74,23 @@ const EmployeeAdd = () => {
     }
   };
 
-  console.log('empPerformance=>', employeeAddField.empPerformance);
+  // For React Select
+  const animatedComponents = makeAnimated();
+
+  const techOptions = [
+    { value: 'angular', label: 'Angular' },
+    { value: 'react', label: 'React' },
+    { value: 'node', label: 'Node' },
+  ];
+
+  const onChangeSelect = (techData) => {
+    console.log('techData=>', techData);
+    setEmployeeAddField({
+      ...employeeAddField,
+      technology: [...techData],
+    });
+  };
+  console.log('technology=>', employeeAddField.technology);
 
   return (
     <div className="container mt-4">
@@ -206,6 +226,18 @@ const EmployeeAdd = () => {
                 }}
               />{' '}
             </Form.Group>
+          </Form.Group>
+
+          <Form.Group as={Col} md="3" controlId="validationCustom03">
+            <Form.Label>Technology</Form.Label>
+            <Select
+              placeholder="Add your skills"
+              options={techOptions}
+              isMulti
+              components={animatedComponents}
+              value={employeeAddField.technology}
+              onChange={(option) => onChangeSelect(option)}
+            />
           </Form.Group>
         </Row>
         <Row className="mb-3">

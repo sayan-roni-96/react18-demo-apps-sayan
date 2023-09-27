@@ -4,3 +4,6 @@ https://create-react-app.dev/
 
 // React Editors
 https://blog.logrocket.com/best-text-editors-react/
+
+// React Select
+https://react-select.com/
