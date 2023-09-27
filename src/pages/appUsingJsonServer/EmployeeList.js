@@ -82,6 +82,7 @@ const EmployeeList = () => {
               <th>Email</th>
               <th>Gender</th>
               <th>Phone</th>
+              <th>Status</th>
               <th>Performance</th>
               <th>Action</th>
             </tr>
@@ -96,6 +97,7 @@ const EmployeeList = () => {
                     <td>{eData.email}</td>
                     <td>{eData.gender}</td>
                     <td>{eData.phone}</td>
+                    <td>{eData.status == true ? 'Active' : 'Inactive'}</td>
                     <td
                       style={{
                         color:

@@ -41,6 +41,7 @@ const EmployeeEdit = () => {
     empPhone: state.singledata.phone || '',
     empGender: state.singledata.gender || '',
     technology: state.singledata.technology || [],
+    employeeStatus: state.singledata.status || false,
   });
 
   const [errorMsg, setErrorMsg] = useState('');
@@ -69,6 +70,7 @@ const EmployeeEdit = () => {
         gender: employeeEditField.empGender,
         technology: employeeEditField.technology,
         fulldetails: employeeFullDetails,
+        status: employeeEditField.employeeStatus,
       };
 
       axios
@@ -191,6 +193,28 @@ const EmployeeEdit = () => {
               value={employeeEditField.technology}
               onChange={(option) => onChangeSelect(option)}
             />
+          </Form.Group>
+          <Form.Group as={Col} md="3" controlId="validationCustom03">
+            <Form.Label>Status</Form.Label>
+            <InputGroup className="mb-3">
+              <InputGroup.Checkbox
+                aria-label="Checkbox for following text input"
+                checked={employeeEditField.employeeStatus}
+                onChange={(e) =>
+                  setEmployeeEditField({
+                    ...employeeEditField,
+                    employeeStatus: e.target.checked,
+                  })
+                }
+              />{' '}
+              &nbsp; &nbsp;
+              <span>
+                {employeeEditField.employeeStatus == true
+                  ? 'Active'
+                  : 'Inactive'}{' '}
+                Employee
+              </span>
+            </InputGroup>
           </Form.Group>
         </Row>
         <Row className="mb-3">

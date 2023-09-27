@@ -14,23 +14,27 @@
           "label": "Node"
         }
       ],
-      "fulldetails": "used to demonstrate the visual form of a"
+      "fulldetails": "used to demonstrate the visual form of a",
+      "status": true
     },
     {
-      "id": "5a1b6c1b-41d2-4ae0-8fec-054f26da5c38",
-      "employeename": "Priya Das",
-      "email": "priya@test.com",
-      "phone": "9874584521",
-      "gender": "Female",
-      "details": "used to demonstrate the visual form of a used to demonstrate the visual form of a used to demonstrate the visual form of a used to demonstrate the visual form of a ",
-      "performance": "Good",
+      "employeename": "Ritam Das",
+      "email": "ritam@yahoo.com",
+      "phone": "11194584578",
+      "gender": "Male",
       "technology": [
         {
-          "value": "react",
-          "label": "React"
+          "value": "angular",
+          "label": "Angular"
+        },
+        {
+          "value": "node",
+          "label": "Node"
         }
       ],
-      "fulldetails": "<p><strong style=\"color: rgb(32, 33, 34);\">used to demonstrate the visual form of a&nbsp;</strong></p>"
+      "fulldetails": "<h2>Multiple addons<a href=\"https://react-bootstrap.netlify.app/docs/forms/input-group/#multiple-addons\" rel=\"noopener noreferrer\" target=\"_blank\" style=\"color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));\">​</a></h2><p>Multiple add-ons are supported and can be mixed with checkbox and radio input versions.</p>",
+      "status": false,
+      "id": "d07f632f-8f09-47f6-967b-959776cfc980"
     }
   ]
 }

@@ -20,6 +20,7 @@ const EmployeeAdd = () => {
     empDetails: '',
     empPerformance: 'Good',
     technology: [],
+    employeeStatus: false,
   });
 
   const [employeeFullDetails, setEmployeeFullDetails] = useState('');
@@ -54,6 +55,7 @@ const EmployeeAdd = () => {
         performance: employeeAddField.empPerformance,
         technology: employeeAddField.technology,
         fulldetails: employeeFullDetails,
+        status: employeeAddField.employeeStatus,
       };
       axios
         .post(`${process.env.REACT_APP_JSON_URL}/employee`, newData)
@@ -95,7 +97,7 @@ const EmployeeAdd = () => {
       technology: [...techData],
     });
   };
-  console.log('employeeFullDetails=>', employeeFullDetails);
+  console.log('employeeStatus=>', employeeAddField.employeeStatus);
 
   return (
     <div className="container mt-4">
@@ -167,7 +169,7 @@ const EmployeeAdd = () => {
               <option value="Others">Others</option>
             </Form.Select>
           </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustom03">
+          <Form.Group as={Col} md="3" controlId="validationCustom03">
             <Form.Label>Employee Performence</Form.Label>
             <Form.Group>
               <label className="form-check-label">Good</label>{' '}
@@ -231,6 +233,29 @@ const EmployeeAdd = () => {
                 }}
               />{' '}
             </Form.Group>
+          </Form.Group>
+
+          <Form.Group as={Col} md="3" controlId="validationCustom03">
+            <Form.Label>Status</Form.Label>
+            <InputGroup className="mb-3">
+              <InputGroup.Checkbox
+                aria-label="Checkbox for following text input"
+                checked={employeeAddField.employeeStatus}
+                onChange={(e) =>
+                  setEmployeeAddField({
+                    ...employeeAddField,
+                    employeeStatus: e.target.checked,
+                  })
+                }
+              />{' '}
+              &nbsp; &nbsp;
+              <span>
+                {employeeAddField.employeeStatus == true
+                  ? 'Active'
+                  : 'Inactive'}{' '}
+                Employee
+              </span>
+            </InputGroup>
           </Form.Group>
 
           <Form.Group as={Col} md="3" controlId="validationCustom03">
