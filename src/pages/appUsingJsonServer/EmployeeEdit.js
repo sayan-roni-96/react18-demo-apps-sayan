@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 const EmployeeEdit = () => {
   const { empid } = useParams();
@@ -36,6 +38,7 @@ const EmployeeEdit = () => {
     empEmail: state.singledata.email || '',
     empPhone: state.singledata.phone || '',
     empGender: state.singledata.gender || '',
+    technology: state.singledata.technology || [],
   });
 
   const [errorMsg, setErrorMsg] = useState('');
@@ -58,6 +61,7 @@ const EmployeeEdit = () => {
         email: employeeEditField.empEmail,
         phone: employeeEditField.empPhone,
         gender: employeeEditField.empGender,
+        technology: employeeEditField.technology,
       };
 
       axios
@@ -78,6 +82,24 @@ const EmployeeEdit = () => {
   };
 
   console.log('employeeEditField.empGender=>', employeeEditField.empGender);
+
+  // For React Select
+  const animatedComponents = makeAnimated();
+
+  const techOptions = [
+    { value: 'angular', label: 'Angular' },
+    { value: 'react', label: 'React' },
+    { value: 'node', label: 'Node' },
+  ];
+
+  const onChangeSelect = (techData) => {
+    console.log('techData=>', techData);
+    setEmployeeEditField({
+      ...employeeEditField,
+      technology: [...techData],
+    });
+  };
+  console.log('technology=>', employeeEditField.technology);
 
   return (
     <div className="container mt-4">
@@ -151,24 +173,18 @@ const EmployeeEdit = () => {
                 );
               })}
             </Form.Select>
-            {/* <Form.Control.Feedback type="invalid">
-              Please provide a valid city.
-            </Form.Control.Feedback> */}
           </Form.Group>
-          {/* <Form.Group as={Col} md="3" controlId="validationCustom04">
-            <Form.Label>State</Form.Label>
-            <Form.Control type="text" placeholder="State" />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid state.
-            </Form.Control.Feedback>
+          <Form.Group as={Col} md="3" controlId="validationCustom03">
+            <Form.Label>Technology</Form.Label>
+            <Select
+              placeholder="Add your skills"
+              options={techOptions}
+              isMulti
+              components={animatedComponents}
+              value={employeeEditField.technology}
+              onChange={(option) => onChangeSelect(option)}
+            />
           </Form.Group>
-          <Form.Group as={Col} md="3" controlId="validationCustom05">
-            <Form.Label>Zip</Form.Label>
-            <Form.Control type="text" placeholder="Zip" />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid zip.
-            </Form.Control.Feedback>
-          </Form.Group> */}
         </Row>
         <Button type="submit">Save form</Button>{' '}
         <Link className="btn btn-secondary" to={'/employeelist'}>
