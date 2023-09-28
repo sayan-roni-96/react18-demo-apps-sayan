@@ -29,6 +29,22 @@ const StudentView = () => {
                 <strong>Details:</strong> {singledata.details}
             </div>
             <div>
+                <strong>Student Status:</strong> {singledata.status == true
+                  ? 'Active'
+                  : 'Inactive'}{' '}
+            </div>
+            <div>
+                <strong>Student Advice:</strong> <div dangerouslySetInnerHTML={{ __html: singledata.advicestudent }}></div>
+            </div>
+            <div>
+            <strong>Interests:</strong>
+        <ul>
+          {singledata.interest.map((interest) => (
+            <li key={interest.value}>{interest.label}</li>
+          ))}
+        </ul>
+      </div>
+            <div>
             <Link className="btn btn-primary" to={'/studentlist'}>
           Go Back
         </Link>
