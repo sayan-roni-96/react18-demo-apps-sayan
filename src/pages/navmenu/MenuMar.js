@@ -12,6 +12,7 @@ const MenuBar = () => {
             <Navbar.Brand href="#home">My Apps</Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/workerlist">Worker List</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <Dropdown.Item href="/practodo">Practice Todo</Dropdown.Item>
                 <Dropdown.Item href="/counter">Small Counter</Dropdown.Item>

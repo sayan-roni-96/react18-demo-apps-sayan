@@ -1,0 +1,31 @@
+{
+    "workers": [
+        {
+            "id": 1,
+            "name": "Terry Medhurst",
+            "age": 50,
+            "gender": "male",
+            "email": "atuny0@sohu.com",
+            "phone": "+63 791 675 8914",
+            "image": "https://robohash.org/hicveldicta.png"
+        },
+        {
+            "id": 2,
+            "name": "Sheldon Quigley",
+            "age": 28,
+            "gender": "male",
+            "email": "hbingley1@plala.or.jp",
+            "phone": "+7 813 117 7139",
+            "image": "https://robohash.org/doloremquesintcorrupti.png"
+        },
+        {
+            "id": 3,
+            "name": "Miles Cummerata",
+            "age": 49,
+            "gender": "male",
+            "email": "yraigatt3@nature.com",
+            "phone": "+86 461 145 4186",
+            "image": ""
+        }
+    ]
+}

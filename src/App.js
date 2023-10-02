@@ -23,6 +23,7 @@ import StudentList from './pages/appUsingJsonServer/StudentList';
 import StudentView from './pages/appUsingJsonServer/StudentView';
 import StudentAdd from './pages/appUsingJsonServer/StudentAdd';
 import StudentEdit from './pages/appUsingJsonServer/StudentEdit';
+import WorkerList from './pages/updateworker/WorkerList';
 
 function App() {
   return (
@@ -56,6 +57,9 @@ function App() {
         <Route path="/studentview/:id" element={<StudentView />} />
         <Route exact path="/studentadd" element={<StudentAdd />} />
         <Route exact path="/studentedit/:stuid" element={<StudentEdit />} />
+
+        {/* New Worker Crud*/ }
+        <Route exact path="/workerlist" element={<WorkerList />} />
 
       </Routes>
     </div>
