@@ -1,31 +1,76 @@
 {
-    "workers": [
-        {
-            "id": 1,
-            "name": "Terry Medhurst",
-            "age": 50,
-            "gender": "male",
-            "email": "atuny0@sohu.com",
-            "phone": "+63 791 675 8914",
-            "image": "https://robohash.org/hicveldicta.png"
-        },
-        {
-            "id": 2,
-            "name": "Sheldon Quigley",
-            "age": 28,
-            "gender": "male",
-            "email": "hbingley1@plala.or.jp",
-            "phone": "+7 813 117 7139",
-            "image": "https://robohash.org/doloremquesintcorrupti.png"
-        },
-        {
-            "id": 3,
-            "name": "Miles Cummerata",
-            "age": 49,
-            "gender": "male",
-            "email": "yraigatt3@nature.com",
-            "phone": "+86 461 145 4186",
-            "image": ""
-        }
-    ]
+  "workers": [
+    {
+      "id": 1,
+      "name": "Terry Medhurst",
+      "age": 50,
+      "gender": "male",
+      "email": "atuny0@sohu.com",
+      "phone": "+63 791 675 8914",
+      "image": "https://robohash.org/hicveldicta.png"
+    },
+    {
+      "id": 2,
+      "name": "Sheldon Quigley",
+      "age": 28,
+      "gender": "male",
+      "email": "hbingley1@plala.or.jp",
+      "phone": "+7 813 117 7139",
+      "image": "https://robohash.org/doloremquesintcorrupti.png"
+    },
+    {
+      "id": 3,
+      "name": "Miles Cummerata",
+      "age": 49,
+      "gender": "male",
+      "email": "yraigatt3@nature.com",
+      "phone": "+86 461 145 4186",
+      "image": ""
+    },
+    {
+      "name": "Sayan Dutta",
+      "age": "34",
+      "email": "sayan@test.com",
+      "phone": "963214578",
+      "gender": "Female",
+      "image": "",
+      "id": 4
+    },
+    {
+      "name": "Sayan ",
+      "age": "76",
+      "email": "1@april.biz",
+      "phone": "7410852",
+      "gender": "Other",
+      "image": "",
+      "id": 5
+    },
+    {
+      "name": "Sayan Dutta",
+      "age": "45",
+      "email": "test@test.com",
+      "phone": "7410852",
+      "gender": "Other",
+      "image": "",
+      "id": 6
+    },
+    {
+      "name": "pom",
+      "age": "23",
+      "email": "1@april.biz",
+      "phone": "8465132",
+      "gender": "Male",
+      "image": "",
+      "id": 7
+    },
+    {
+      "name": "pom",
+      "age": "23",
+      "email": "1@april.biz",
+      "phone": "8465132",
+      "gender": "Male",
+      "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fnectarhr.com%2Fblog%2Femployee-of-the-month-idea&psig=AOvVaw3z65pEhlE8iSgqv4JI78GH&ust=1696420027446000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOC4yp7n2YEDFQAAAAAdAAAAABAH",
+      "id": 8
+    }
+  ]
 }
