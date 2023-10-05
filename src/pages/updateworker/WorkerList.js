@@ -20,6 +20,59 @@ const WorkerList = () => {
     gender: '',
     image: '',
   });
+  const [editWorkerData, setEditWorkerData] = useState({
+    id: '', // Add 'id' to track the worker being edited
+    efirstName: '',
+    elastName: '',
+    eage: '',
+    eemail: '',
+    ephone: '',
+    egender: '',
+    eimage: '',
+  });
+  const genderWorkData = [
+    {
+      id: 1,
+      name: 'Male',
+      value: 'Male',
+    },
+    {
+      id: 2,
+      name: 'Female',
+      value: 'Female',
+    },
+    {
+      id: 3,
+      name: 'Others',
+      value: 'Others',
+    },
+  ];
+  
+  const [showEditWorkerModal, setShowEditWorkerModal] = useState(false);
+
+  
+
+ const handleUpdateWorker = () => {
+  const { id, ...updatedData } = editWorkerData;
+
+  axios
+    .put(`${process.env.REACT_APP_NEW_WORKER_JSON_URL}/users/${id}`, updatedData)
+    .then((resp) => {
+      console.log('resp=>', resp);
+      if (resp.status === 200) {
+        setShowEditWorkerModal(false); // Close the edit worker modal
+        // Optionally, you can update the client-side data if needed
+        // For example, find the worker in allWorker and update its properties
+        // const updatedWorker = allWorker.find((w) => w.id === id);
+        // if (updatedWorker) {
+        //   Object.assign(updatedWorker, updatedData);
+        // }
+      }
+    })
+    .catch((err) => {
+      console.error('Error occurred while updating user data:', err);
+    });
+};
 
   // Replace with your default image URL
   const defaultImageUrl = 'https://robohash.org/perferendisideveniet.png';
@@ -29,6 +82,7 @@ const WorkerList = () => {
     const { name, value } = e.target;
     setNewWorkerData({ ...newWorkerData, [name]: value });
   };
+
 
   // Function to handle saving the new worker data
   const handleSaveWorker = () => {
@@ -49,7 +103,8 @@ const WorkerList = () => {
             gender: '',
             image: '',
           });
-          getAllWorker(); // Refresh the worker list
+           setallWorker([...allWorker, resp.data]); 
+          //getAllWorker(); // Refresh the worker list
         }
       })
       .catch((err) => {
@@ -90,10 +145,12 @@ const WorkerList = () => {
 
   /* Delete user data from API */
   const deleteWorkerClick = (delworkerid) => {
+    console.log('delworkerid=>',delworkerid);
     if (window.confirm('Do you want to Delete Data ?')) {
       axios
         .delete(`${process.env.REACT_APP_NEW_WORKER_JSON_URL}/users/${delworkerid}`)
         .then((response) => {
+          console.log('Hi');
           if (response.status === 200) {
             // If the delete request was successful, update the client-side data
             const updatedWorkerData = allWorker.filter(
@@ -210,6 +267,55 @@ const WorkerList = () => {
       </Modal>
       {/* Add Modal End */}
 
+      {/*Edit Modal Open */}
+      <Modal show={showEditWorkerModal} onHide={() => setShowEditWorkerModal(false)}>
+  <Modal.Header closeButton>
+    <Modal.Title>Edit Worker</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <Form>
+      <Form.Group controlId="firstName">
+        <Form.Label>First Name</Form.Label>
+        <Form.Control
+          type="text"
+          name="firstName"
+          value={editWorkerData.efirstName}
+          onChange={(e) => {
+            setEditWorkerData({
+              ...editWorkerData,
+              efirstName: e.target.value,
+            });
+          }}
+        />
+      </Form.Group>
+      <Form.Group controlId="lastName">
+        <Form.Label>Last Name</Form.Label>
+        <Form.Control
+          type="text"
+          name="lastName"
+          value={editWorkerData.elastName}
+          onChange={(e) => {
+            setEditWorkerData({
+              ...editWorkerData,
+              efirstName: e.target.value,
+            });
+          }}
+        />
+      </Form.Group>
+      {/* Other input fields */}
+    </Form>
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={() => setShowEditWorkerModal(false)}>
+      Cancel
+    </Button>
+    <Button variant="primary" onClick={handleUpdateWorker}>
+      Update
+    </Button>
+  </Modal.Footer>
+</Modal>
+      {/*Edit Modal Close*/ }
+
       <div className="mb-4">
         <Link className="btn btn-primary" to={''} onClick={() => setShowAddWorkerModal(true)}>
           Add Worker
@@ -249,10 +355,10 @@ const WorkerList = () => {
                   <img src={wData.image || defaultImageUrl} alt="Worker" width="100" height="100" />
                 </td>
                 <td>
-                  <Button variant="success" onClick={() => viewDataModal(wData)}>
+                <Button variant="success" onClick={() => viewDataModal(wData)}>
                     View
                   </Button>{' '}
-                  <Button variant="warning">Edit</Button>{' '}
+                {/* <Button variant="warning" onClick={() => editWorkerModal(wData)}>Edit</Button>{' '} */}
                   <Button variant="danger" onClick={() => deleteWorkerClick(wData.id)}>
                     Delete
                   </Button>
