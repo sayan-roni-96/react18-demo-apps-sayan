@@ -6,11 +6,17 @@ import { Link } from 'react-router-dom';
 import WorkerViewModal from './modals/WorkerViewModal';
 
 const WorkerList = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  // const [filteredWorkers, setFilteredWorkers] = useState([]);
   const [allWorker, setallWorker] = useState([]);
   const [dataLoading, setDataLoading] = useState(false);
   const [newDataview, setnewDataview] = useState(false);
   const [workerDetail, setworkerDetail] = useState();
   const [showAddWorkerModal, setShowAddWorkerModal] = useState(false);
+//  // for search
+//   const handleSearchChange = (e) => {
+//     setSearchQuery(e.target.value);
+//   };
   const [newWorkerData, setNewWorkerData] = useState({
     firstName: '', // Change 'name' to 'firstName'
     lastName: '',  // Add 'lastName'
@@ -30,6 +36,19 @@ const WorkerList = () => {
     egender: '',
     eimage: '',
   });
+  const editWorkerModal = (workerData) => {
+    setEditWorkerData({
+      id: workerData.id,
+      efirstName: workerData.firstName,
+      elastName: workerData.lastName,
+      eage: workerData.age,
+      eemail: workerData.email,
+      ephone: workerData.phone,
+      egender: workerData.gender,
+      eimage: workerData.image,
+    });
+    setShowEditWorkerModal(true); // Open the edit worker modal
+  };
   const genderWorkData = [
     {
       id: 1,
@@ -50,29 +69,64 @@ const WorkerList = () => {
   
   const [showEditWorkerModal, setShowEditWorkerModal] = useState(false);
 
+  // const filterWorkers = () => {
+  //   const query = searchQuery.toLowerCase();
+  //   const filtered = allWorker.filter((worker) => {
+  //     const fullName = `${worker.firstName} ${worker.lastName}`.toLowerCase();
+  //     return fullName.includes(query);
+  //   });
+  //   setFilteredWorkers(filtered);
+  // };
+  // const handleResetSearch = () => {
+  //   setSearchQuery('');
+  //   setFilteredWorkers([]);
+  // };
+
+//  // Function to handle changes in the input fields for editing a worker
+//   const handleEditWorkerChange = (e) => {
+//     const { name, value } = e.target;
+//     setEditWorkerData({ ...editWorkerData, [name]: value });
+//   };
+
+  // Function to handle updating the edited worker data
+  const handleUpdateWorker = () => {
+    const updatedData = {
+      firstName: editWorkerData.efirstName,
+      lastName:  editWorkerData.elastName,
+      age:  editWorkerData.eage,
+      email : editWorkerData.eemail,
+      // Add other properties here as needed
+    };
   
-
- const handleUpdateWorker = () => {
-  const { id, ...updatedData } = editWorkerData;
-
-  axios
-    .put(`${process.env.REACT_APP_NEW_WORKER_JSON_URL}/users/${id}`, updatedData)
+    axios
+    .put(`${process.env.REACT_APP_NEW_WORKER_JSON_URL}/users/${editWorkerData.id}`, updatedData)
     .then((resp) => {
       console.log('resp=>', resp);
       if (resp.status === 200) {
         setShowEditWorkerModal(false); // Close the edit worker modal
-        // Optionally, you can update the client-side data if needed
-        // For example, find the worker in allWorker and update its properties
-        // const updatedWorker = allWorker.find((w) => w.id === id);
-        // if (updatedWorker) {
-        //   Object.assign(updatedWorker, updatedData);
-        // }
+        // Update the client-side data with the updated worker data
+        setallWorker((prevWorkers) => {
+          return prevWorkers.map((worker) => {
+            if (worker.id === editWorkerData.id) {
+              return {
+                ...worker,
+                firstName: editWorkerData.efirstName,
+                lastName:  editWorkerData.elastName,
+                age:  editWorkerData.eage,
+                email : editWorkerData.eemail,
+                // Update other properties here as needed
+              };
+            }
+            return worker;
+          });
+        });
       }
     })
     .catch((err) => {
       console.error('Error occurred while updating user data:', err);
     });
-};
+  };
+
 
   // Replace with your default image URL
   const defaultImageUrl = 'https://robohash.org/perferendisideveniet.png';
@@ -144,28 +198,15 @@ const WorkerList = () => {
   };
 
   /* Delete user data from API */
-  const deleteWorkerClick = (delworkerid) => {
-    console.log('delworkerid=>',delworkerid);
-    if (window.confirm('Do you want to Delete Data ?')) {
-      axios
-        .delete(`${process.env.REACT_APP_NEW_WORKER_JSON_URL}/users/${delworkerid}`)
-        .then((response) => {
-          console.log('Hi');
-          if (response.status === 200) {
-            // If the delete request was successful, update the client-side data
-            const updatedWorkerData = allWorker.filter(
-              (worker) => worker.id !== delworkerid
-            );
-            setallWorker(updatedWorkerData);
-          } else {
-            // Handle errors here if needed
-            console.error('Failed to delete user data:', response);
-          }
-        })
-        .catch((error) => {
-          // Handle errors here if needed
-          console.error('Error occurred while deleting user data:', error);
-        });
+  const deleteWorkerClick = (dId) => {
+    console.log('dId->', dId);
+    if (window.confirm('Do you want to delete?')) {
+      const removeUser = [...allWorker].filter((uData, indx) => {
+        // console.log('deleteClick-Data->', uData.id);
+      // console.log('deleteClick-Indx->', uData.id !== dId);
+         return uData.id !== dId;
+       });
+       setallWorker(removeUser);
     }
   };
 
@@ -269,51 +310,88 @@ const WorkerList = () => {
 
       {/*Edit Modal Open */}
       <Modal show={showEditWorkerModal} onHide={() => setShowEditWorkerModal(false)}>
-  <Modal.Header closeButton>
-    <Modal.Title>Edit Worker</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    <Form>
-      <Form.Group controlId="firstName">
-        <Form.Label>First Name</Form.Label>
-        <Form.Control
-          type="text"
-          name="firstName"
-          value={editWorkerData.efirstName}
-          onChange={(e) => {
-            setEditWorkerData({
-              ...editWorkerData,
-              efirstName: e.target.value,
-            });
-          }}
-        />
-      </Form.Group>
-      <Form.Group controlId="lastName">
-        <Form.Label>Last Name</Form.Label>
-        <Form.Control
-          type="text"
-          name="lastName"
-          value={editWorkerData.elastName}
-          onChange={(e) => {
-            setEditWorkerData({
-              ...editWorkerData,
-              efirstName: e.target.value,
-            });
-          }}
-        />
-      </Form.Group>
-      {/* Other input fields */}
-    </Form>
-  </Modal.Body>
-  <Modal.Footer>
-    <Button variant="secondary" onClick={() => setShowEditWorkerModal(false)}>
-      Cancel
-    </Button>
-    <Button variant="primary" onClick={handleUpdateWorker}>
-      Update
-    </Button>
-  </Modal.Footer>
-</Modal>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Worker</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="efirstName">
+              <Form.Label>First Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="efirstName"
+                value={editWorkerData.efirstName}
+                onChange={(e) => {
+                  setEditWorkerData({
+                    ...editWorkerData,
+                    efirstName: e.target.value,
+                  });
+                }}
+              />
+            </Form.Group>
+            <Form.Group controlId="elastName">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="elastName"
+                  value={editWorkerData.elastName}
+                  onChange={(e) => {
+                    setEditWorkerData({
+                      ...editWorkerData,
+                      elastName: e.target.value, // Update elastName separately
+                    });
+                  }}
+                />
+              </Form.Group>
+              <Form.Group controlId="eage">
+                <Form.Label>Age</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="eage"
+                  value={editWorkerData.eage}
+                  onChange={(e) => {
+                    setEditWorkerData({
+                      ...editWorkerData,
+                      eage: e.target.value, // Update eage separately
+                    });
+                  }}
+                />
+              </Form.Group>
+              <Form.Group controlId="eemail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="eemail"
+                  value={editWorkerData.eemail}
+                  onChange={(e) => {
+                    setEditWorkerData({
+                      ...editWorkerData,
+                      eemail: e.target.value, // Update eage separately
+                    });
+                  }}
+                />
+              </Form.Group>
+            {/* <Form.Group controlId="elastName">
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="elastName"
+                value={editWorkerData.elastName}
+                onChange={handleEditWorkerChange}
+              />
+            </Form.Group> */}
+            {/* Add other input fields for editing */}
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowEditWorkerModal(false)}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleUpdateWorker}>
+            Update
+          </Button>
+        </Modal.Footer>
+      </Modal>
       {/*Edit Modal Close*/ }
 
       <div className="mb-4">
@@ -321,7 +399,17 @@ const WorkerList = () => {
           Add Worker
         </Link>
       </div>
-
+      <div className="mb-4">
+            <input
+              type="text"
+              placeholder="Search workers by name"
+              value={searchQuery}
+              // onChange={handleSearchChange}
+            />
+            <Button variant="secondary">
+              Reset
+            </Button>
+      </div>
       {dataLoading ? (
         <Loaders />
       ) : allWorker.length === 0 ? (
@@ -358,7 +446,7 @@ const WorkerList = () => {
                 <Button variant="success" onClick={() => viewDataModal(wData)}>
                     View
                   </Button>{' '}
-                {/* <Button variant="warning" onClick={() => editWorkerModal(wData)}>Edit</Button>{' '} */}
+                <Button variant="warning" onClick={() => editWorkerModal(wData)}>Edit</Button>{' '} 
                   <Button variant="danger" onClick={() => deleteWorkerClick(wData.id)}>
                     Delete
                   </Button>
