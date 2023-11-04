@@ -34,6 +34,9 @@ const MenuBar = () => {
                 <Dropdown.Item href="/studentlist">
                   CRUD Student Using Json Server
                 </Dropdown.Item>
+                <Dropdown.Item href="/redux/employeelist">
+                  CRUD Student Using Redux
+                </Dropdown.Item>
               </NavDropdown>
             </Nav>
           </Container>

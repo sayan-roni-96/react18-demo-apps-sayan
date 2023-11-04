@@ -24,6 +24,7 @@ import StudentView from './pages/appUsingJsonServer/StudentView';
 import StudentAdd from './pages/appUsingJsonServer/StudentAdd';
 import StudentEdit from './pages/appUsingJsonServer/StudentEdit';
 import WorkerList from './pages/updateworker/WorkerList';
+import EmployeeListPage from './pages/CrudUsingRedux/EmployeeListPage';
 
 function App() {
   return (
@@ -51,16 +52,22 @@ function App() {
         <Route exact path="/employeelist" element={<EmployeeList />} />
         <Route exact path="/employeeadd" element={<EmployeeAdd />} />
         <Route exact path="/employeeedit/:empid" element={<EmployeeEdit />} />
-        <Route path="/employeedetails/:id"  element={<EmployeeDetails/>} />
+        <Route path="/employeedetails/:id" element={<EmployeeDetails />} />
 
         <Route exact path="/studentlist" element={<StudentList />} />
         <Route path="/studentview/:id" element={<StudentView />} />
         <Route exact path="/studentadd" element={<StudentAdd />} />
         <Route exact path="/studentedit/:stuid" element={<StudentEdit />} />
 
-        {/* New Worker Crud*/ }
+        {/* New Worker Crud*/}
         <Route exact path="/workerlist" element={<WorkerList />} />
 
+        {/* CRUD Using Redux */}
+        <Route
+          exact
+          path="/redux/employeelist"
+          element={<EmployeeListPage />}
+        />
       </Routes>
     </div>
   );
