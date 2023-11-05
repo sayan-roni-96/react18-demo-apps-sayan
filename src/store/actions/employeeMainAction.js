@@ -6,7 +6,7 @@ export const getAllMainEmployees = createAsyncThunk(
   async () => {
     // const response = await axios.get(`${rootBaseUrl}/employees`);
     const response = await RootApi.get(`/employee`);
-    console.log('response-get', response);
+    console.log('response-get=>', response);
     return response.data;
   }
 );
