@@ -25,6 +25,7 @@ import StudentAdd from './pages/appUsingJsonServer/StudentAdd';
 import StudentEdit from './pages/appUsingJsonServer/StudentEdit';
 import WorkerList from './pages/updateworker/WorkerList';
 import EmployeeListPage from './pages/CrudUsingRedux/EmployeeListPage';
+import EmployeeViewPage from './pages/CrudUsingRedux/EmployeeViewPage';
 
 function App() {
   return (
@@ -67,6 +68,11 @@ function App() {
           exact
           path="/redux/employeelist"
           element={<EmployeeListPage />}
+        />
+        <Route
+          exact
+          path="/redux/employeedetail/:rvid"
+          element={<EmployeeViewPage />}
         />
       </Routes>
     </div>
