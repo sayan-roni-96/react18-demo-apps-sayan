@@ -1,31 +1,30 @@
-import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
-import { toast } from 'react-toastify';
-import React, { useState } from 'react';
-import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
-import { Link, useNavigate } from 'react-router-dom';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import ToastMessage from '../components/ToastMessage';
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
+import React, { useState } from "react";
+import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
+import { Link, useNavigate } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const EmployeeAdd = () => {
   const navigate = useNavigate();
   const [employeeAddField, setEmployeeAddField] = useState({
-    empName: '',
-    empEmail: '',
-    empPhone: '',
-    empGender: '',
-    empDetails: '',
-    empPerformance: 'Good',
+    empName: "",
+    empEmail: "",
+    empPhone: "",
+    empGender: "",
+    empDetails: "",
+    empPerformance: "Good",
     technology: [],
     employeeStatus: false,
   });
 
-  const [employeeFullDetails, setEmployeeFullDetails] = useState('');
+  const [employeeFullDetails, setEmployeeFullDetails] = useState("");
 
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState("");
 
   const employeeSubmit = (e) => {
     e.preventDefault();
@@ -37,11 +36,11 @@ const EmployeeAdd = () => {
       !employeeAddField.empDetails
     ) {
       // setErrorMsg('Please fill all fields');
-      toast.error('Please fill all fields!', {
+      toast.error("Please fill all fields!", {
         position: toast.POSITION.TOP_RIGHT,
       });
       setTimeout(() => {
-        setErrorMsg('');
+        setErrorMsg("");
       }, 2000);
     } else {
       const newData = {
@@ -60,23 +59,23 @@ const EmployeeAdd = () => {
       axios
         .post(`${process.env.REACT_APP_JSON_URL}/employee`, newData)
         .then((resp) => {
-          console.log('resp=>', resp);
+          console.log("resp=>", resp);
           if (resp.status == 201) {
-            toast.success('New employee created!', {
+            toast.success("New employee created!", {
               position: toast.POSITION.TOP_RIGHT,
             });
             setTimeout(() => {
               setEmployeeAddField({
-                empName: '',
-                empEmail: '',
-                empPhone: '',
+                empName: "",
+                empEmail: "",
+                empPhone: "",
               });
-              navigate('/employeelist');
+              navigate("/employeelist");
             }, 1000);
           }
         })
         .catch((err) => {
-          console.log('save_error=>', err);
+          console.log("save_error=>", err);
         });
     }
   };
@@ -85,23 +84,22 @@ const EmployeeAdd = () => {
   const animatedComponents = makeAnimated();
 
   const techOptions = [
-    { value: 'angular', label: 'Angular' },
-    { value: 'react', label: 'React' },
-    { value: 'node', label: 'Node' },
+    { value: "angular", label: "Angular" },
+    { value: "react", label: "React" },
+    { value: "node", label: "Node" },
   ];
 
   const onChangeSelect = (techData) => {
-    console.log('techData=>', techData);
+    console.log("techData=>", techData);
     setEmployeeAddField({
       ...employeeAddField,
       technology: [...techData],
     });
   };
-  console.log('employeeStatus=>', employeeAddField.employeeStatus);
+  console.log("employeeStatus=>", employeeAddField.employeeStatus);
 
   return (
     <div className="container mt-4">
-      <ToastMessage />
       <Form onSubmit={employeeSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="validationCustom01">
@@ -172,13 +170,13 @@ const EmployeeAdd = () => {
           <Form.Group as={Col} md="3" controlId="validationCustom03">
             <Form.Label>Employee Performence</Form.Label>
             <Form.Group>
-              <label className="form-check-label">Good</label>{' '}
+              <label className="form-check-label">Good</label>{" "}
               <input
                 className="form-check-input"
                 type="radio"
                 value="Good"
                 checked={
-                  employeeAddField.empPerformance === 'Good' ? true : false
+                  employeeAddField.empPerformance === "Good" ? true : false
                 }
                 onChange={(e) => {
                   setEmployeeAddField({
@@ -186,14 +184,14 @@ const EmployeeAdd = () => {
                     empPerformance: e.target.value,
                   });
                 }}
-              />{' '}
-              <label className="form-check-label">Better</label>{' '}
+              />{" "}
+              <label className="form-check-label">Better</label>{" "}
               <input
                 className="form-check-input"
                 type="radio"
                 value="Better"
                 checked={
-                  employeeAddField.empPerformance === 'Better' ? true : false
+                  employeeAddField.empPerformance === "Better" ? true : false
                 }
                 onChange={(e) => {
                   setEmployeeAddField({
@@ -201,14 +199,14 @@ const EmployeeAdd = () => {
                     empPerformance: e.target.value,
                   });
                 }}
-              />{' '}
-              <label className="form-check-label">Best</label>{' '}
+              />{" "}
+              <label className="form-check-label">Best</label>{" "}
               <input
                 className="form-check-input"
                 type="radio"
                 value="Best"
                 checked={
-                  employeeAddField.empPerformance === 'Best' ? true : false
+                  employeeAddField.empPerformance === "Best" ? true : false
                 }
                 onChange={(e) => {
                   setEmployeeAddField({
@@ -216,14 +214,14 @@ const EmployeeAdd = () => {
                     empPerformance: e.target.value,
                   });
                 }}
-              />{' '}
-              <label className="form-check-label">Worst</label>{' '}
+              />{" "}
+              <label className="form-check-label">Worst</label>{" "}
               <input
                 className="form-check-input"
                 type="radio"
                 value="Worst"
                 checked={
-                  employeeAddField.empPerformance === 'Worst' ? true : false
+                  employeeAddField.empPerformance === "Worst" ? true : false
                 }
                 onChange={(e) => {
                   setEmployeeAddField({
@@ -231,7 +229,7 @@ const EmployeeAdd = () => {
                     empPerformance: e.target.value,
                   });
                 }}
-              />{' '}
+              />{" "}
             </Form.Group>
           </Form.Group>
 
@@ -247,12 +245,12 @@ const EmployeeAdd = () => {
                     employeeStatus: e.target.checked,
                   })
                 }
-              />{' '}
+              />{" "}
               &nbsp; &nbsp;
               <span>
                 {employeeAddField.employeeStatus == true
-                  ? 'Active'
-                  : 'Inactive'}{' '}
+                  ? "Active"
+                  : "Inactive"}{" "}
                 Employee
               </span>
             </InputGroup>
@@ -276,7 +274,7 @@ const EmployeeAdd = () => {
             <Form.Control
               as="textarea"
               placeholder="Type here..."
-              style={{ height: '100px' }}
+              style={{ height: "100px" }}
               value={employeeAddField.empDetails}
               onChange={(e) => {
                 setEmployeeAddField({
@@ -297,11 +295,11 @@ const EmployeeAdd = () => {
             />
           </Form.Group>
         </Row>
-        <Button type="submit">Submit form</Button>{' '}
-        <Link className="btn btn-secondary" to={'/employeelist'}>
+        <Button type="submit">Submit form</Button>{" "}
+        <Link className="btn btn-secondary" to={"/employeelist"}>
           Go Back
-        </Link>{' '}
-        <h4 style={{ color: 'red' }}>{errorMsg}</h4>
+        </Link>{" "}
+        <h4 style={{ color: "red" }}>{errorMsg}</h4>
       </Form>
     </div>
   );

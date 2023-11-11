@@ -27,11 +27,13 @@ import WorkerList from "./pages/updateworker/WorkerList";
 import EmployeeListPage from "./pages/CrudUsingRedux/EmployeeListPage";
 import EmployeeViewPage from "./pages/CrudUsingRedux/EmployeeViewPage";
 import EmployeeAddPage from "./pages/CrudUsingRedux/EmployeeAddPage";
+import ToastMessage from "./pages/components/ToastMessage";
 
 function App() {
   return (
     <div className="App_class container mt-4">
       <h1>React18-New Applications</h1>
+      <ToastMessage />
       <MenuBar />
       <Routes>
         <Route exact path="/" element={<MainTodo />} />
