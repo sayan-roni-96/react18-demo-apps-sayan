@@ -1,31 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 //import MainTodo from './pages/todoApp/MainTodo';
-import PracTodo from './pages/newtodoApp/PracTodo';
-import MainTodo from './pages/todoApp/MainTodo';
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
-import ViewTodo from './pages/todoApp/ViewTodo';
-import MenuBar from './pages/navmenu/MenuMar';
-import SmallCounter from './pages/smallApps/SmallCounter';
-import SmallCalculator from './pages/smallApps/SmallCalculator';
-import UserList from './pages/appUsingApi/jsonfakeapi/UserList';
-import NewUserList from './pages/appUsingApi/jsonfakeapi/NewUserList';
-import UserListPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserListPage';
-import UserViewPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserViewPage';
-import UserEditPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserEditPage';
-import UserAddPage from './pages/appUsingApi/jsonfakeapi/withoutModal/UserAddPage';
-import EmployeeList from './pages/appUsingJsonServer/EmployeeList';
-import EmployeeAdd from './pages/appUsingJsonServer/EmployeeAdd';
-import EmployeeEdit from './pages/appUsingJsonServer/EmployeeEdit';
-import EmployeeDetails from './pages/appUsingJsonServer/EmployeeDetails';
-import StudentList from './pages/appUsingJsonServer/StudentList';
-import StudentView from './pages/appUsingJsonServer/StudentView';
-import StudentAdd from './pages/appUsingJsonServer/StudentAdd';
-import StudentEdit from './pages/appUsingJsonServer/StudentEdit';
-import WorkerList from './pages/updateworker/WorkerList';
-import EmployeeListPage from './pages/CrudUsingRedux/EmployeeListPage';
-import EmployeeViewPage from './pages/CrudUsingRedux/EmployeeViewPage';
+import PracTodo from "./pages/newtodoApp/PracTodo";
+import MainTodo from "./pages/todoApp/MainTodo";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import ViewTodo from "./pages/todoApp/ViewTodo";
+import MenuBar from "./pages/navmenu/MenuMar";
+import SmallCounter from "./pages/smallApps/SmallCounter";
+import SmallCalculator from "./pages/smallApps/SmallCalculator";
+import UserList from "./pages/appUsingApi/jsonfakeapi/UserList";
+import NewUserList from "./pages/appUsingApi/jsonfakeapi/NewUserList";
+import UserListPage from "./pages/appUsingApi/jsonfakeapi/withoutModal/UserListPage";
+import UserViewPage from "./pages/appUsingApi/jsonfakeapi/withoutModal/UserViewPage";
+import UserEditPage from "./pages/appUsingApi/jsonfakeapi/withoutModal/UserEditPage";
+import UserAddPage from "./pages/appUsingApi/jsonfakeapi/withoutModal/UserAddPage";
+import EmployeeList from "./pages/appUsingJsonServer/EmployeeList";
+import EmployeeAdd from "./pages/appUsingJsonServer/EmployeeAdd";
+import EmployeeEdit from "./pages/appUsingJsonServer/EmployeeEdit";
+import EmployeeDetails from "./pages/appUsingJsonServer/EmployeeDetails";
+import StudentList from "./pages/appUsingJsonServer/StudentList";
+import StudentView from "./pages/appUsingJsonServer/StudentView";
+import StudentAdd from "./pages/appUsingJsonServer/StudentAdd";
+import StudentEdit from "./pages/appUsingJsonServer/StudentEdit";
+import WorkerList from "./pages/updateworker/WorkerList";
+import EmployeeListPage from "./pages/CrudUsingRedux/EmployeeListPage";
+import EmployeeViewPage from "./pages/CrudUsingRedux/EmployeeViewPage";
+import EmployeeAddPage from "./pages/CrudUsingRedux/EmployeeAddPage";
 
 function App() {
   return (
@@ -69,6 +70,7 @@ function App() {
           path="/redux/employeelist"
           element={<EmployeeListPage />}
         />
+        <Route exact path="/redux/employee/add" element={<EmployeeAddPage />} />
         <Route
           exact
           path="/redux/employeedetail/:rvid"

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Dropdown, Nav, NavDropdown, Navbar } from 'react-bootstrap';
+import React from "react";
+import { Container, Dropdown, Nav, NavDropdown, Navbar } from "react-bootstrap";
 // import { Link } from 'react-router-dom';
 // import {button} from 'bootstrap'
 
@@ -35,7 +35,7 @@ const MenuBar = () => {
                   CRUD Student Using Json Server
                 </Dropdown.Item>
                 <Dropdown.Item href="/redux/employeelist">
-                  CRUD Student Using Redux
+                  CRUD Employee Using Redux
                 </Dropdown.Item>
               </NavDropdown>
             </Nav>
