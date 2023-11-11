@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { postNewEmployee } from "../../store/actions/employeeMainAction";
 
 const EmployeeAddPage = () => {
+  const dispatch = useDispatch();
   const [empAddState, setEmpAddState] = useState({
     empName: "",
     empEmail: "",
@@ -28,8 +31,31 @@ const EmployeeAddPage = () => {
       toast.error("Please fill all the fields!", {
         position: toast.POSITION.TOP_RIGHT,
       });
+    } else {
+      const newData = {
+        employeename: empAddState.empName,
+        email: empAddState.empEmail,
+        phone: empAddState.empPhone,
+        gender: empAddState.empGender,
+      };
+
+      dispatch(postNewEmployee(newData))
+        .then((resp) => {
+          console.log("resp=>", resp);
+          setEmpAddState({
+            empName: "",
+            empEmail: "",
+            empPhone: "",
+            empGender: "",
+          });
+        })
+        .catch((err) => {
+          console.log("err=>", err);
+        });
     }
   };
+
+  // console.log("empAddState=>", empAddState.empName);
 
   return (
     <div className="container">

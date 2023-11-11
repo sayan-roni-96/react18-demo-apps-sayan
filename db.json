@@ -35,6 +35,34 @@
       "fulldetails": "<p><strong style=\"color: rgb(0, 0, 0);\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0);\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></p>",
       "status": true,
       "id": "e21aeb54-60d8-4662-ae44-c15117237abe"
+    },
+    {
+      "employeename": "Mala Singha",
+      "email": "mala@yahoo.com",
+      "phone": "9875485748",
+      "gender": "female",
+      "id": "_AaNUqB"
+    },
+    {
+      "employeename": "Sumit Giri",
+      "email": "sumit@yahoo.com",
+      "phone": "9875485748",
+      "gender": "male",
+      "id": "fGFTQa7"
+    },
+    {
+      "employeename": "Sumit Giri",
+      "email": "sumit@yahoo.com",
+      "phone": "9875485748",
+      "gender": "male",
+      "id": "stmi434"
+    },
+    {
+      "employeename": "Sumit Giri",
+      "email": "sumit@yahoo.com",
+      "phone": "9875485748",
+      "gender": "male",
+      "id": "beesK-s"
     }
   ]
 }
