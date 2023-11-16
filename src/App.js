@@ -28,6 +28,8 @@ import EmployeeListPage from "./pages/CrudUsingRedux/EmployeeListPage";
 import EmployeeViewPage from "./pages/CrudUsingRedux/EmployeeViewPage";
 import EmployeeAddPage from "./pages/CrudUsingRedux/EmployeeAddPage";
 import ToastMessage from "./pages/components/ToastMessage";
+import StudentListPage from "./pages/NewCardRedux/StudentListPage";
+import StudentViewPage from "./pages/NewCardRedux/StudentViewPage";
 
 function App() {
   return (
@@ -78,9 +80,21 @@ function App() {
           path="/redux/employeedetail/:rvid"
           element={<EmployeeViewPage />}
         />
+        <Route
+              exact
+              path="/redux/studentlist"
+              element={<StudentListPage />}
+              />
+              <Route
+          exact
+          path="/redux/studentdetail/:stuid"
+          element={<StudentViewPage />}
+        />
       </Routes>
+     
     </div>
   );
 }
 
 export default App;
+

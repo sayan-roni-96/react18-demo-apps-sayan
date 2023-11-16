@@ -31,10 +31,4 @@ export const postNewEmployee = createAsyncThunk(
   }
 );
 
-//this is for new user
-export const getAllMainUsers = createAsyncThunk("users/get", async () => {
-  // const response = await axios.get(`${rootBaseUrl}/employees`);
-  const response = await RootNewApi.get(`/users`);
-  // console.log('response-get=>', response);
-  return response.data.reverse();
-});
+

@@ -37,6 +37,9 @@ const MenuBar = () => {
                 <Dropdown.Item href="/redux/employeelist">
                   CRUD Employee Using Redux
                 </Dropdown.Item>
+                <Dropdown.Item href="/redux/studentlist">
+                  CRUD Student Using Redux
+                </Dropdown.Item>
               </NavDropdown>
             </Nav>
           </Container>
