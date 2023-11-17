@@ -20,6 +20,13 @@ const StudentListPage = () => {
       }; 
   return (
     <div className="container">
+       <button
+        className="btn btn-primary"
+        style={{ marginTop: '20px' }}
+        onClick={() => navigate("/redux/student/add")}
+      >
+        Add Employee
+      </button>
          {allStudentData.length === 0 ? (
         <h4>No Student found!</h4>
       ) : isLoading === true ? (

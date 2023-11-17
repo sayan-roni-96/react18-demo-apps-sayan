@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllMainStudents, getSingleStudent } from "../actions/studentMainAction";
+import { getAllMainStudents, getSingleStudent, postNewStudent } from "../actions/studentMainAction";
 const initialState = {
     allStudentData: [],
     singleStudent: {},
@@ -47,6 +47,27 @@ const studentMainSlice = createSlice({
       builder.addCase(getSingleStudent.rejected, (state) => {
         state.isLoading = false;
         state.singleStudent = {};
+        state.message = "Something Went Wrong!";
+      });
+
+      // Add employee/post
+    builder.addCase(postNewStudent.pending, (state) => {
+        state.isLoading = true;
+        state.message = "Employee data add panding!";
+      });
+  
+      builder.addCase(postNewStudent.fulfilled, (state, action) => {
+        console.log("postNewStudent=fulfilled=>", action);
+        state.isLoading = false;
+        state.allStudentData = [...state.allStudentData, action.payload];
+        state.message = "Employee data added!";
+      });
+  
+      builder.addCase(postNewStudent.rejected, (state, action) => {
+        console.log("postNewStudent=rejected=>", action);
+  
+        state.isLoading = false;
+        state.allEmployeeData = action.payload;
         state.message = "Something Went Wrong!";
       });
     },

@@ -30,6 +30,7 @@ import EmployeeAddPage from "./pages/CrudUsingRedux/EmployeeAddPage";
 import ToastMessage from "./pages/components/ToastMessage";
 import StudentListPage from "./pages/NewCardRedux/StudentListPage";
 import StudentViewPage from "./pages/NewCardRedux/StudentViewPage";
+import StudentAddPage from "./pages/NewCardRedux/StudentAddPage";
 
 function App() {
   return (
@@ -90,6 +91,7 @@ function App() {
           path="/redux/studentdetail/:stuid"
           element={<StudentViewPage />}
         />
+        <Route exact path="/redux/student/add" element={<StudentAddPage />} />
       </Routes>
      
     </div>

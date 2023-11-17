@@ -19,3 +19,16 @@ export const getAllMainStudents = createAsyncThunk("student/get", async () => {
       return response.data;
     }
   );
+
+  export const postNewStudent = createAsyncThunk(
+    "student/post",
+    async (newAddStudent) => {
+      console.log("newAddData=>", newAddStudent);
+      const response = await axios.post(`${rootNewBaseUrl}/student/`,newAddStudent);
+      //const response = await RootApi.post(`/employee`, newAddStudent);
+      console.log("response@@-add=>", response);
+      return response.data;
+    }
+  );
+
+  
