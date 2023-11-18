@@ -29,6 +29,18 @@ const StudentViewPage = () => {
             <br />
            Subject: {singleStudent.favsubject}
            <br />
+           {singleStudent.interest && singleStudent.interest.length > 0 ? (
+                <>
+                  Favourite Subject:
+                  <ul>
+                    {singleStudent.interest.map((interest) => (
+                      <li key={interest.value}>{interest.label}</li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                "No favourite subjects."
+              )}
           </Card.Text>
           <Link variant="primary" to={'/redux/studentlist'}>
             Go Back

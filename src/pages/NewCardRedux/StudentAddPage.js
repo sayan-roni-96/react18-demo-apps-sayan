@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Col, Form, FormSelect } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { postNewStudent } from "../../store/actions/studentMainAction";
 import { Link, Navigate } from "react-router-dom";
+import makeAnimated from "react-select/animated";
+import ReactSelect from "react-select";
 
 const StudentAddPage = () => {
   const dispatch = useDispatch();
@@ -13,6 +15,7 @@ const StudentAddPage = () => {
     stuSubject: "",
     stuGender: "",
     stuPerformance: "",
+    interest: [],
   });
 
   const onFieldChange = (evt) => {
@@ -21,9 +24,39 @@ const StudentAddPage = () => {
       [evt.target.name]: evt.target.value,
     });
   };
+   
 
   const addSubmit = (evt) => {
     evt.preventDefault();
+    // Validation for name (only text)
+    const nameRegex = /^[A-Za-z\s]+$/;
+    if (!nameRegex.test(stuAddState.stuName)) {
+      toast.error("Name must contain only letters and spaces", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      //setErrorMsg('Name must contain only letters and spaces');
+      return;
+    }
+
+    // Validation for age (only numbers)
+    const ageRegex = /^[0-9]+$/;
+    if (!ageRegex.test(stuAddState.stuAge)) {
+      toast.error("Age must contain only numbers", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      //setErrorMsg('Age must contain only numbers');
+      return;
+    }
+
+   
+
+    // interest field vallidation
+    if (!stuAddState.interest || stuAddState.interest.length === 0) {
+      toast.error("Please select at least one interest", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      return;
+    }
     if (
       !stuAddState.stuName ||
       !stuAddState.stuAge ||
@@ -41,6 +74,7 @@ const StudentAddPage = () => {
         favsubject: stuAddState.stuSubject,
         gender: stuAddState.stuGender,
         performance: stuAddState.stuPerformance,
+        interest: stuAddState.interest,
       };
 
       dispatch(postNewStudent(newData))
@@ -51,13 +85,29 @@ const StudentAddPage = () => {
             stuAge: "",
             stuSubject: "",
             stuGender: "",
-            stuPerformance: ""
+            stuPerformance: "",
+            interest: "",
           });
         })
         .catch((err) => {
           console.log("err=>", err);
         });
     }
+  };
+  const animatedComponents = makeAnimated();
+
+  const curricularOptions = [
+    { value: 'drawing', label: 'Drawing' },
+    { value: 'singing', label: 'Singing' },
+    { value: 'swimming', label: 'Swimming' }, // Corrected typo here
+  ];
+
+  const onChangeSelect = (curriData) => {
+    console.log('curriData =>', curriData);
+    setStuAddState({
+      ...stuAddState,
+      interest: curriData,
+    });
   };
   return (
 <div className="container">
@@ -80,7 +130,7 @@ const StudentAddPage = () => {
               <Form.Label>Student Age</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter Subject"
+                placeholder="Enter Age"
                 name="stuAge"
                 value={stuAddState.stuAge}
                 onChange={(e) => onFieldChange(e)}
@@ -127,6 +177,19 @@ const StudentAddPage = () => {
                 onChange={(e) => onFieldChange(e)}
               />
             </Form.Group>
+          </div>
+          <div>
+          <Form.Group as={Col} md="3" controlId="validationCustom03" style={{ marginBottom: '10px' }}>
+        <Form.Label>Student Interest</Form.Label>
+        <ReactSelect
+          placeholder="Add Student's Interest"
+          options={curricularOptions}
+          isMulti
+          components={animatedComponents}
+          value={stuAddState.interest}
+          onChange={(option) => onChangeSelect(option)}
+        />
+      </Form.Group>
           </div>
         <Button variant="primary" type="submit" style={{ marginRight: '10px' }}>
           Submit

@@ -94,6 +94,24 @@
       "gender": "male",
       "performance": "Good",
       "id": "wWpWbtQ"
+    },
+    {
+      "studentname": "Paul",
+      "age": "25",
+      "favsubject": "History",
+      "gender": "Others",
+      "performance": "Good",
+      "interest": [
+        {
+          "value": "drawing",
+          "label": "Drawing"
+        },
+        {
+          "value": "swimming",
+          "label": "Swimming"
+        }
+      ],
+      "id": "1yKW_xt"
     }
   ]
 }
