@@ -33,6 +33,7 @@ const EmployeeAddPage = () => {
       });
     } else {
       const newData = {
+        id: Date.now(),
         employeename: empAddState.empName,
         email: empAddState.empEmail,
         phone: empAddState.empPhone,

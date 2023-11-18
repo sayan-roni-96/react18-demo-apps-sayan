@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  editExistEmployee,
   getAllMainEmployees,
   getSingleEmployee,
   postNewEmployee,
@@ -25,7 +26,7 @@ const employeeMainSlice = createSlice({
     });
 
     builder.addCase(getAllMainEmployees.fulfilled, (state, action) => {
-      console.log("action=>", action);
+      // console.log("action=>", action);
       state.isLoading = false;
       state.allEmployeeData = action.payload;
       state.message = "Employee data fetched!";
@@ -44,14 +45,14 @@ const employeeMainSlice = createSlice({
     });
 
     builder.addCase(postNewEmployee.fulfilled, (state, action) => {
-      console.log("postNewEmployee=fulfilled=>", action);
+      // console.log("postNewEmployee=fulfilled=>", action);
       state.isLoading = false;
       state.allEmployeeData = [...state.allEmployeeData, action.payload];
       state.message = "Employee data added!";
     });
 
     builder.addCase(postNewEmployee.rejected, (state, action) => {
-      console.log("postNewEmployee=rejected=>", action);
+      // console.log("postNewEmployee=rejected=>", action);
 
       state.isLoading = false;
       state.allEmployeeData = action.payload;
@@ -63,7 +64,7 @@ const employeeMainSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getSingleEmployee.fulfilled, (state, action) => {
-      console.log("getSingleEmployee-action=>", action);
+      // console.log("getSingleEmployee-action=>", action);
       state.isLoading = false;
       state.singleEmployee = action.payload;
       state.message = "Single employee data fetched!";
@@ -71,6 +72,27 @@ const employeeMainSlice = createSlice({
     builder.addCase(getSingleEmployee.rejected, (state) => {
       state.isLoading = false;
       state.singleEmployee = {};
+      state.message = "Something Went Wrong!";
+    });
+
+    // Add employee/post
+    builder.addCase(editExistEmployee.pending, (state) => {
+      state.isLoading = true;
+      state.message = "Employee data edit panding!";
+    });
+
+    builder.addCase(editExistEmployee.fulfilled, (state, action) => {
+      console.log("editExistEmployee=fulfilled=>", action);
+      state.isLoading = false;
+      state.allEmployeeData = [...state.allEmployeeData, action.payload];
+      state.message = "Employee data updated!";
+    });
+
+    builder.addCase(editExistEmployee.rejected, (state, action) => {
+      console.log("editExistEmployee=rejected=>", action);
+
+      state.isLoading = false;
+      state.allEmployeeData = action.payload;
       state.message = "Something Went Wrong!";
     });
   },

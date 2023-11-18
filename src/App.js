@@ -31,6 +31,7 @@ import ToastMessage from "./pages/components/ToastMessage";
 import StudentListPage from "./pages/NewCardRedux/StudentListPage";
 import StudentViewPage from "./pages/NewCardRedux/StudentViewPage";
 import StudentAddPage from "./pages/NewCardRedux/StudentAddPage";
+import EmployeeEditPage from "./pages/CrudUsingRedux/EmployeeEditPage";
 
 function App() {
   return (
@@ -82,21 +83,22 @@ function App() {
           element={<EmployeeViewPage />}
         />
         <Route
-              exact
-              path="/redux/studentlist"
-              element={<StudentListPage />}
-              />
-              <Route
+          exact
+          path="/redux/employeedetail/edit/:revid"
+          element={<EmployeeEditPage />}
+        />
+
+        {/* Student Work */}
+        <Route exact path="/redux/studentlist" element={<StudentListPage />} />
+        <Route
           exact
           path="/redux/studentdetail/:stuid"
           element={<StudentViewPage />}
         />
         <Route exact path="/redux/student/add" element={<StudentAddPage />} />
       </Routes>
-     
     </div>
   );
 }
 
 export default App;
-

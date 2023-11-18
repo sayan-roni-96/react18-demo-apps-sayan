@@ -19,6 +19,12 @@ const EmployeeListPage = () => {
     navigate(`/redux/employeedetail/${vData.id}`);
   };
 
+  const editClick = (edata) => {
+    navigate(`/redux/employeedetail/edit/${edata.id}`, {
+      state: { singleState: edata },
+    });
+  };
+
   return (
     <div className="container">
       <button
@@ -63,7 +69,12 @@ const EmployeeListPage = () => {
                           View
                         </button>
                         &nbsp;&nbsp;&nbsp;
-                        <button className="btn btn-warning">Edit</button>
+                        <button
+                          className="btn btn-warning"
+                          onClick={() => editClick(edata)}
+                        >
+                          Edit
+                        </button>
                         &nbsp;&nbsp;&nbsp;
                         <button className="btn btn-danger">Delete</button>
                       </td>

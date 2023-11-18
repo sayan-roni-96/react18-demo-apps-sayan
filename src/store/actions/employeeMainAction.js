@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { RootApi, RootNewApi } from "../../RootApi";
+import { RootApi } from "../../RootApi";
 
 export const getAllMainEmployees = createAsyncThunk(
   "employee/get",
@@ -24,11 +24,20 @@ export const getSingleEmployee = createAsyncThunk(
 export const postNewEmployee = createAsyncThunk(
   "employee/post",
   async (newAddData) => {
-    console.log("newAddData=>", newAddData);
+    // console.log("newAddData=>", newAddData);
     const response = await RootApi.post(`/employee`, newAddData);
-    console.log("response@@-add=>", response);
+    // console.log("response@@-add=>", response);
     return response.data;
   }
 );
 
-
+export const editExistEmployee = createAsyncThunk(
+  "employee/edit",
+  async ({ eid, newFormData }) => {
+    console.log("newFormData=>", newFormData);
+    console.log("eid=>", eid);
+    const response = await RootApi.put(`/employee/${eid}`, newFormData);
+    console.log("response@@-edit=>", response);
+    return response.data;
+  }
+);
