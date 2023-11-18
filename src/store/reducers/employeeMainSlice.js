@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  deleteAnEmployee,
   editExistEmployee,
   getAllMainEmployees,
   getSingleEmployee,
@@ -82,14 +83,35 @@ const employeeMainSlice = createSlice({
     });
 
     builder.addCase(editExistEmployee.fulfilled, (state, action) => {
-      console.log("editExistEmployee=fulfilled=>", action);
+      // console.log("editExistEmployee=fulfilled=>", action);
       state.isLoading = false;
       state.allEmployeeData = [...state.allEmployeeData, action.payload];
       state.message = "Employee data updated!";
     });
 
     builder.addCase(editExistEmployee.rejected, (state, action) => {
-      console.log("editExistEmployee=rejected=>", action);
+      // console.log("editExistEmployee=rejected=>", action);
+
+      state.isLoading = false;
+      state.allEmployeeData = action.payload;
+      state.message = "Something Went Wrong!";
+    });
+
+    // delete employee/delete
+    builder.addCase(deleteAnEmployee.pending, (state) => {
+      state.isLoading = true;
+      state.message = "Employee data edit panding!";
+    });
+
+    builder.addCase(deleteAnEmployee.fulfilled, (state, action) => {
+      console.log("deleteAnEmployee=fulfilled=>", action);
+      state.isLoading = false;
+      state.allEmployeeData = [...state.allEmployeeData, action.payload];
+      state.message = "Employee data deleted!";
+    });
+
+    builder.addCase(deleteAnEmployee.rejected, (state, action) => {
+      console.log("deleteAnEmployee=rejected=>", action);
 
       state.isLoading = false;
       state.allEmployeeData = action.payload;

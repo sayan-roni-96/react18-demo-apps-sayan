@@ -34,10 +34,20 @@ export const postNewEmployee = createAsyncThunk(
 export const editExistEmployee = createAsyncThunk(
   "employee/edit",
   async ({ eid, newFormData }) => {
-    console.log("newFormData=>", newFormData);
-    console.log("eid=>", eid);
+    // console.log("newFormData=>", newFormData);
+    // console.log("eid=>", eid);
     const response = await RootApi.put(`/employee/${eid}`, newFormData);
-    console.log("response@@-edit=>", response);
+    // console.log("response@@-edit=>", response);
+    return response.data;
+  }
+);
+
+export const deleteAnEmployee = createAsyncThunk(
+  "employee/delete",
+  async (did) => {
+    console.log("did=>", did);
+    const response = await RootApi.delete(`/employee/${did}`);
+    // console.log("response@@-edit=>", response);
     return response.data;
   }
 );

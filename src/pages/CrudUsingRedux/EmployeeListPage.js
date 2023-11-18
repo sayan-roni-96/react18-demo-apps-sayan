@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllMainEmployees } from "../../store/actions/employeeMainAction";
+import {
+  deleteAnEmployee,
+  getAllMainEmployees,
+} from "../../store/actions/employeeMainAction";
 import Loaders from "../components/Loaders";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +12,7 @@ const EmployeeListPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { allEmployeeData, isLoading } = useSelector((state) => state.employee);
-  console.log("allEmployeeData=>", allEmployeeData, isLoading);
+  // console.log("allEmployeeData=>", allEmployeeData, isLoading);
 
   useEffect(() => {
     dispatch(getAllMainEmployees());
@@ -23,6 +26,17 @@ const EmployeeListPage = () => {
     navigate(`/redux/employeedetail/edit/${edata.id}`, {
       state: { singleState: edata },
     });
+  };
+
+  const deleteClick = (dData) => {
+    if (window.confirm("Do you want?")) {
+      dispatch(deleteAnEmployee(dData.id)).then((resp) => {
+        console.log("resp=>", resp);
+        if (resp.type === "employee/delete/fulfilled") {
+          dispatch(getAllMainEmployees());
+        }
+      });
+    }
   };
 
   return (
@@ -76,7 +90,12 @@ const EmployeeListPage = () => {
                           Edit
                         </button>
                         &nbsp;&nbsp;&nbsp;
-                        <button className="btn btn-danger">Delete</button>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => deleteClick(edata)}
+                        >
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   </tbody>
