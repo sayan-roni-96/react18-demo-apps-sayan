@@ -3,7 +3,7 @@ import { Table } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import Loaders from "../components/Loaders";
 import { useNavigate } from "react-router-dom";
-import { getAllMainStudents } from "../../store/actions/studentMainAction";
+import { deleteAnStudent, getAllMainStudents } from "../../store/actions/studentMainAction";
 
 const StudentListPage = () => {
     const dispatch = useDispatch();
@@ -18,6 +18,17 @@ const StudentListPage = () => {
       const viewClick = (vData) => {
         navigate(`/redux/studentdetail/${vData.id}`);
       }; 
+     //delete data
+      const deleteClick = (dData) => {
+        if (window.confirm("Do you want delete Student Data?")) {
+          dispatch(deleteAnStudent(dData.id)).then((resp) => {
+            console.log("resp=>", resp);
+            if (resp.type === "student/delete/fulfilled") {
+              dispatch(getAllMainStudents());
+            }
+          });
+        }
+      };
   return (
     <div className="container">
        <button
@@ -68,7 +79,7 @@ const StudentListPage = () => {
                     &nbsp;&nbsp;&nbsp;
                     <button className="btn btn-warning">Edit</button>
                     &nbsp;&nbsp;&nbsp;
-                    <button className="btn btn-danger">Delete</button>
+                    <button className="btn btn-danger"  onClick={() => deleteClick(edata)}>Delete</button>
                   </td>
                 </tr>
               </tbody>

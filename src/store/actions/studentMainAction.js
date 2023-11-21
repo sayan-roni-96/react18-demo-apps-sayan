@@ -31,4 +31,14 @@ export const getAllMainStudents = createAsyncThunk("student/get", async () => {
     }
   );
 
+  export const deleteAnStudent = createAsyncThunk(
+    "student/delete",
+    async (studid) => {
+      console.log("did=>", studid);
+      //const response = await RootApi.delete(`/employee/${studid}`);
+      const response = await axios.delete(`${rootNewBaseUrl}/student/${studid}`);
+      // console.log("response@@-edit=>", response);
+      return response.data;
+    }
+  );
   

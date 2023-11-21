@@ -1,26 +1,6 @@
 {
   "student": [
     {
-      "id": "0f19b20f-daea-4c6a-bf13-e2f3bf0765c2",
-      "studentname": "Prabhat",
-      "age": "18",
-      "favsubject": "Chemistry",
-      "gender": "Female",
-      "performance": "Outstanding",
-      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-      "advicestudent": "<p>Try To Improve</p>",
-      "interest": [
-        {
-          "value": "drawing",
-          "label": "Drawing"
-        },
-        {
-          "value": "singing",
-          "label": "Singing"
-        }
-      ]
-    },
-    {
       "id": "f5350f8e-bf86-4973-b2e5-27b78587575b",
       "studentname": "Roni",
       "age": "23",

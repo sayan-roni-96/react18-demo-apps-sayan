@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllMainStudents, getSingleStudent, postNewStudent } from "../actions/studentMainAction";
+import { deleteAnStudent, getAllMainStudents, getSingleStudent, postNewStudent } from "../actions/studentMainAction";
 const initialState = {
     allStudentData: [],
     singleStudent: {},
@@ -70,6 +70,27 @@ const studentMainSlice = createSlice({
         state.allEmployeeData = action.payload;
         state.message = "Something Went Wrong!";
       });
+       // delete employee/delete
+    builder.addCase(deleteAnStudent.pending, (state) => {
+      state.isLoading = true;
+      state.message = "Delete Student Data panding!";
+    });
+
+    builder.addCase(deleteAnStudent.fulfilled, (state, action) => {
+      console.log("deleteAnStudent=fulfilled=>", action);
+      state.isLoading = false;
+      state.allStudentData = [...state.allStudentData, action.payload];
+      state.message = "Student data deleted!";
+    });
+
+    builder.addCase(deleteAnStudent.rejected, (state, action) => {
+      console.log("deleteAnStudent=rejected=>", action);
+
+      state.isLoading = false;
+      state.allStudentData = action.payload;
+      state.message = "Something Went Wrong!";
+    });
+      
     },
  });
 
