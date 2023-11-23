@@ -18,7 +18,16 @@ const StudentListPage = () => {
       const viewClick = (vData) => {
         navigate(`/redux/studentdetail/${vData.id}`);
       }; 
+
+      //edit data
+      const editClick = (esdata) => {
+        navigate(`/redux/studentdetail/edit/${esdata.id}`, {
+          state: { singleState: esdata },
+        });
+      };
+     
      //delete data
+
       const deleteClick = (dData) => {
         if (window.confirm("Do you want delete Student Data?")) {
           dispatch(deleteAnStudent(dData.id)).then((resp) => {
@@ -77,7 +86,7 @@ const StudentListPage = () => {
                       View
                     </button>
                     &nbsp;&nbsp;&nbsp;
-                    <button className="btn btn-warning">Edit</button>
+                    <button className="btn btn-warning" onClick={() => editClick(edata)}>Edit</button>
                     &nbsp;&nbsp;&nbsp;
                     <button className="btn btn-danger"  onClick={() => deleteClick(edata)}>Delete</button>
                   </td>

@@ -32,6 +32,7 @@ import StudentListPage from "./pages/NewCardRedux/StudentListPage";
 import StudentViewPage from "./pages/NewCardRedux/StudentViewPage";
 import StudentAddPage from "./pages/NewCardRedux/StudentAddPage";
 import EmployeeEditPage from "./pages/CrudUsingRedux/EmployeeEditPage";
+import StudentEditPage from "./pages/NewCardRedux/StudentEditPage";
 
 function App() {
   return (
@@ -96,6 +97,11 @@ function App() {
           element={<StudentViewPage />}
         />
         <Route exact path="/redux/student/add" element={<StudentAddPage />} />
+        <Route
+          exact
+          path="/redux/studentdetail/edit/:stuedid"
+          element={<StudentEditPage />}
+        />
       </Routes>
     </div>
   );

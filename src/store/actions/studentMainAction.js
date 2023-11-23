@@ -31,6 +31,17 @@ export const getAllMainStudents = createAsyncThunk("student/get", async () => {
     }
   );
 
+  export const editExistStudent = createAsyncThunk(
+    "student/edit",
+    async ({ sid, newFormData }) => {
+      // console.log("newFormData=>", newFormData);
+      // console.log("eid=>", eid);
+      const response = await axios.put(`${rootNewBaseUrl}/student/${sid}`, newFormData);
+      // console.log("response@@-edit=>", response);
+      return response.data;
+    }
+  );
+
   export const deleteAnStudent = createAsyncThunk(
     "student/delete",
     async (studid) => {

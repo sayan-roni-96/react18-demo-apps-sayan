@@ -1,37 +1,44 @@
 {
   "student": [
     {
-      "id": "f5350f8e-bf86-4973-b2e5-27b78587575b",
-      "studentname": "Roni",
+      "studentname": "Sayan234",
       "age": "23",
+      "gender": "male",
       "favsubject": "Bengali",
-      "gender": "Others",
-      "performance": "Poor",
-      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-      "status": true,
-      "advicestudent": "<p>Lorem Ipsum is simply</p>",
+      "interest": [
+        {
+          "value": "singing",
+          "label": "Singing"
+        },
+        {
+          "value": "drawing",
+          "label": "Drawing"
+        },
+        {
+          "value": "swimming",
+          "label": "Swimming"
+        }
+      ],
+      "performance": "LOW",
+      "id": "f5350f8e-bf86-4973-b2e5-27b78587575b"
+    },
+    {
+      "studentname": "Roni",
+      "age": "25",
+      "gender": "female",
+      "favsubject": "Chemistry",
       "interest": [
         {
           "value": "drawing",
           "label": "Drawing"
         },
         {
-          "value": "swiwming",
-          "label": "Swiming"
+          "value": "swimming",
+          "label": "Swimming"
         }
-      ]
-    },
-    {
-      "id": "48589f20-4f94-4879-af1f-ac40b00d37ea",
-      "studentname": "Roni",
-      "age": "24",
-      "favsubject": "Chemistry",
-      "gender": "Male",
-      "performance": "Outstanding",
-      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-      "status": true,
-      "advicestudent": "<p>Lorem Ipsum is simply dummy text</p>",
-      "interest": []
+      ],
+      "performance": "Bad",
+      "id": "48589f20-4f94-4879-af1f-ac40b00d37ea"
     },
     {
       "id": "f2d2ac35-415d-4753-9b32-dc50925b71be",

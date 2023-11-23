@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteAnStudent, getAllMainStudents, getSingleStudent, postNewStudent } from "../actions/studentMainAction";
+import { deleteAnStudent, editExistStudent, getAllMainStudents, getSingleStudent, postNewStudent } from "../actions/studentMainAction";
 const initialState = {
     allStudentData: [],
     singleStudent: {},
@@ -50,7 +50,7 @@ const studentMainSlice = createSlice({
         state.message = "Something Went Wrong!";
       });
 
-      // Add employee/post
+      // Add student/post
     builder.addCase(postNewStudent.pending, (state) => {
         state.isLoading = true;
         state.message = "Employee data add panding!";
@@ -67,10 +67,32 @@ const studentMainSlice = createSlice({
         console.log("postNewStudent=rejected=>", action);
   
         state.isLoading = false;
-        state.allEmployeeData = action.payload;
+        state.allStudentData = action.payload;
         state.message = "Something Went Wrong!";
       });
-       // delete employee/delete
+
+      // Edit Student/post
+    builder.addCase(editExistStudent.pending, (state) => {
+      state.isLoading = true;
+      state.message = "Employee data edit panding!";
+    });
+
+    builder.addCase(editExistStudent.fulfilled, (state, action) => {
+      // console.log("editExistEmployee=fulfilled=>", action);
+      state.isLoading = false;
+      state.allStudentData = [...state.allStudentData, action.payload];
+      state.message = "Employee data updated!";
+    });
+
+    builder.addCase(editExistStudent.rejected, (state, action) => {
+      // console.log("editExistEmployee=rejected=>", action);
+
+      state.isLoading = false;
+      state.allStudentData = action.payload;
+      state.message = "Something Went Wrong!";
+    });
+
+       // delete student/delete
     builder.addCase(deleteAnStudent.pending, (state) => {
       state.isLoading = true;
       state.message = "Delete Student Data panding!";
