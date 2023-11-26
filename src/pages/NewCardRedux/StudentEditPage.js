@@ -6,6 +6,7 @@ import makeAnimated from 'react-select/animated';
 import { toast } from "react-toastify";
 import { editExistStudent } from "../../store/actions/studentMainAction";
 import ReactSelect from "react-select";
+import ReactQuill from "react-quill";
 
 const StudentEditPage = () => {
     const dispatch = useDispatch();
@@ -27,7 +28,8 @@ const StudentEditPage = () => {
     stuSubject: state.singleState.favsubject || "",
     stuInterest: state.singleState.interest || "",
     stuPerformance: state.singleState.performance || "",
-    stuAdvice: state.singleState.advicestudent
+    stuAdvice: state.singleState.advicestudent || "",
+    stuBehave: state.singleState.behave
   });
   console.log('studentEditState',studentEditState);
 
@@ -81,7 +83,8 @@ console.log('interest=>', studentEditState.stuInterest);
       !studentEditState.stuSubject ||
       !studentEditState.stuInterest ||
       !studentEditState.stuPerformance ||
-      !studentEditState.stuAdvice
+      !studentEditState.stuAdvice ||
+      !studentEditState.stuBehave
     ) {
       toast.error("Please fill all the fields!", {
         position: toast.POSITION.TOP_RIGHT,
@@ -94,7 +97,8 @@ console.log('interest=>', studentEditState.stuInterest);
         favsubject:studentEditState.stuSubject,
         interest:studentEditState.stuInterest,
         performance:studentEditState.stuPerformance,
-        advicestudent:studentEditState.stuAdvice
+        advicestudent:studentEditState.stuAdvice,
+        behave:studentEditState.stuBehave
       };
 
       dispatch(editExistStudent({ sid: stuedid, newFormData: newData }))
@@ -196,14 +200,42 @@ console.log('interest=>', studentEditState.stuInterest);
             </Form.Select>
           </div>
           <div className="col-md-3">
+          <Form.Group className="mb-3" controlId="formBasicBehaviour">
+            <Form.Label>Student Behaviour</Form.Label>
+            <div>
+              <Form.Check
+                inline
+                label="Good"
+                type="radio"
+                value="Good"
+                checked={studentEditState.stuBehave === "Good"}
+                onChange={(e) => onInputChange(e)}
+                name="stuBehave"
+              />
+              <Form.Check
+                inline
+                label="Bad"
+                type="radio"
+                value="Bad"
+                checked={studentEditState.stuBehave === "Bad"}
+                onChange={(e) => onInputChange(e)}
+                name="stuBehave"
+              />
+            </div>
+          </Form.Group>
+        </div>
+          <div className="col-md-12">
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Student Adivce</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Advice"
-                name="stuAdvice"
-                value={stripHtmlTags(studentEditState.stuAdvice)}
-                onChange={(e) => onInputChange(e)}
+              <ReactQuill
+                theme="snow"
+                value={studentEditState.stuAdvice}
+                onChange={(value) =>
+                  setStudentEditState({
+                    ...studentEditState,
+                    stuAdvice: value,
+                  })
+                }
               />
             </Form.Group>
           </div>

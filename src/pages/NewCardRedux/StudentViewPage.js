@@ -10,7 +10,7 @@ const StudentViewPage = () => {
   console.log('stuid=>', stuid);
 
   const { singleStudent } = useSelector((state) => state.student);
-  
+
   const stripHtmlTags = (htmlString) => {
     if (!htmlString || typeof htmlString !== 'string') {
       return htmlString;
@@ -49,9 +49,15 @@ const StudentViewPage = () => {
               <br />
             </div>
           )}
+          {singleStudent.behave && (
+            <div>
+              Behaviour: {singleStudent.behave}
+              <br />
+            </div>
+          )}
           {singleStudent.interest && singleStudent.interest.length > 0 ? (
             <div>
-              Favourite Subjects:
+              Favourite Interest:
               <ul>
                 {singleStudent.interest.map((interest) => (
                   <li key={interest.value}>{interest.label}</li>

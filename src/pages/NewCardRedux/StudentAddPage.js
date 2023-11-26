@@ -29,7 +29,7 @@ const StudentAddPage = () => {
     stuPerformance: "",
     interest: [],
     stuAdvice:"",
-    stuStatus: false,
+    stuBehave:"Good"
   });
 
   const onFieldChange = (evt) => {
@@ -78,7 +78,8 @@ const StudentAddPage = () => {
       !stuAddState.stuPerformance||
       !stuAddState.stuGender ||
       !stuAddState.stuAdvice ||
-      !studentAddField.studentStatus
+      !studentAddField.studentStatus ||
+      !stuAddState.stuBehave
     ) {
       toast.error("Please fill all the fields!", {
         position: toast.POSITION.TOP_RIGHT,
@@ -92,7 +93,8 @@ const StudentAddPage = () => {
         performance: stuAddState.stuPerformance,
         interest: stuAddState.interest,
         advicestudent:stuAddState.stuAdvice,
-        status:studentAddField.studentStatus
+        status:studentAddField.studentStatus,
+        behave:stuAddState.stuBehave
       };
 
       dispatch(postNewStudent(newData))
@@ -107,6 +109,7 @@ const StudentAddPage = () => {
             interest: [],
             stuAdvice: "",
             stuStatus: "false",
+            stuBehave:""
           });
           navigate("/redux/studentlist");
         })
@@ -214,7 +217,7 @@ const StudentAddPage = () => {
               </InputGroup>
             </Form.Group>
           </Col>
-          <Col md={6}>
+          <Col md={3}>
             <Form.Group className="mb-3" controlId="validationCustom03">
               <Form.Label>Student Interest</Form.Label>
               <ReactSelect
@@ -227,6 +230,43 @@ const StudentAddPage = () => {
             </Form.Group>
           </Col>
         </Row>
+        <Col md={3}>
+  <Form.Group className="mb-3" controlId="validationCustom03">
+    <Form.Label>Student Behaviour</Form.Label>
+    <div>
+      <Form.Check
+        inline
+        label="Good"
+        type="radio"
+        value="Good"
+        checked={stuAddState.stuBehave === "Good"}
+        onChange={(e) => {
+          setStuAddState({
+            ...stuAddState,
+            stuBehave: e.target.value,
+          });
+        }}
+        name="stuBehave"
+        id="goodRadio"
+      />
+      <Form.Check
+        inline
+        label="Bad"
+        type="radio"
+        value="Bad"
+        checked={stuAddState.stuBehave === "Bad"}
+        onChange={(e) => {
+          setStuAddState({
+            ...stuAddState,
+            stuBehave: e.target.value,
+          });
+        }}
+        name="stuBehave"
+        id="badRadio"
+      />
+    </div>
+  </Form.Group>
+</Col>
         <Row className="mb-3">
           <Col md={12}>
             <Form.Group controlId="validationCustom04">
