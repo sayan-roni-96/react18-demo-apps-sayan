@@ -9,6 +9,12 @@ import ReactSelect from "react-select";
 
 const StudentEditPage = () => {
     const dispatch = useDispatch();
+    const stripHtmlTags = (htmlString) => {
+      if (!htmlString || typeof htmlString !== 'string') {
+        return htmlString;
+      }
+      return htmlString.replace(/<[^>]*>?/gm, ''); // Regex to remove HTML tags
+    };
   const navigate = useNavigate();
   const { state } = useLocation();
   const { stuedid } = useParams();
@@ -21,6 +27,7 @@ const StudentEditPage = () => {
     stuSubject: state.singleState.favsubject || "",
     stuInterest: state.singleState.interest || "",
     stuPerformance: state.singleState.performance || "",
+    stuAdvice: state.singleState.advicestudent
   });
   console.log('studentEditState',studentEditState);
 
@@ -73,7 +80,8 @@ console.log('interest=>', studentEditState.stuInterest);
       !studentEditState.stuGender ||
       !studentEditState.stuSubject ||
       !studentEditState.stuInterest ||
-      !studentEditState.stuPerformance
+      !studentEditState.stuPerformance ||
+      !studentEditState.stuAdvice
     ) {
       toast.error("Please fill all the fields!", {
         position: toast.POSITION.TOP_RIGHT,
@@ -85,7 +93,8 @@ console.log('interest=>', studentEditState.stuInterest);
         gender: studentEditState.stuGender,
         favsubject:studentEditState.stuSubject,
         interest:studentEditState.stuInterest,
-        performance:studentEditState.stuPerformance
+        performance:studentEditState.stuPerformance,
+        advicestudent:studentEditState.stuAdvice
       };
 
       dispatch(editExistStudent({ sid: stuedid, newFormData: newData }))
@@ -174,7 +183,9 @@ console.log('interest=>', studentEditState.stuInterest);
               value={studentEditState.stuGender}
               onChange={(e) => onInputChange(e)}
             >
-              <option value="">--Select One--</option>
+              <option value={studentEditState.stuGender}>
+                {studentEditState.stuGender}
+              </option>
               {genderData.map((gdata, i) => {
                 return (
                   <option key={gdata.id} value={gdata.gvalue}>
@@ -183,6 +194,18 @@ console.log('interest=>', studentEditState.stuInterest);
                 );
               })}
             </Form.Select>
+          </div>
+          <div className="col-md-3">
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Student Adivce</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Advice"
+                name="stuAdvice"
+                value={stripHtmlTags(studentEditState.stuAdvice)}
+                onChange={(e) => onInputChange(e)}
+              />
+            </Form.Group>
           </div>
         </div>
         <Button variant="primary" type="submit">

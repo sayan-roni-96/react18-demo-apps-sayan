@@ -67,7 +67,8 @@ const StudentListPage = () => {
 
       <>
         {allStudentData &&
-          allStudentData.map((edata, index) => {
+         [...allStudentData] // Create a shallow copy of the array
+         .reverse().map((edata, index) => {
             return (
               <tbody key={edata.id}>
                 <tr>

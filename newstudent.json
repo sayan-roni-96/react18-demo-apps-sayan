@@ -95,6 +95,123 @@
         }
       ],
       "id": "4fkeXoW"
+    },
+    {
+      "studentname": "Paul",
+      "age": "50",
+      "favsubject": "Geography",
+      "gender": "Male",
+      "performance": "Good",
+      "interest": [
+        {
+          "value": "drawing",
+          "label": "Drawing"
+        }
+      ],
+      "advicestudent": "<p>Try To Improve</p>",
+      "id": "BbSbk30"
+    },
+    {
+      "studentname": "dfhs",
+      "age": "25",
+      "favsubject": "Geography",
+      "gender": "Male",
+      "performance": "Good",
+      "interest": [
+        {
+          "value": "drawing",
+          "label": "Drawing"
+        }
+      ],
+      "advicestudent": "<p>fdhhgfhfgggggggg</p>",
+      "id": "plvcA08"
+    },
+    {
+      "id": "0a9ee706-1fdb-4d8c-9e8b-ff2461d8b879",
+      "studentname": "kl",
+      "age": "24",
+      "favsubject": "Bengali",
+      "gender": "Female",
+      "performance": "Best",
+      "details": "This code assumes that the dispatch operation completes successfully upon submitting the form. It clears the form fields by resetting their values to empty strings or an empty array and then navigates to the /redux/studentlist route using history.push('/redux/studentlist').\n\nMake sure your Route components and their paths are set up correctly in your React ",
+      "status": true,
+      "advicestudent": "<p>This code assumes that the dispatch operation completes successfully upon submitting the form. It clears the form fields by resetting their values to empty strings or an empty array and then navigates to the /redux/studentlist route using history.push('/redux/studentlist').</p>",
+      "interest": [
+        {
+          "value": "drawing",
+          "label": "Drawing"
+        }
+      ]
+    },
+    {
+      "studentname": "Sayan",
+      "age": "74",
+      "favsubject": "Geography",
+      "gender": "Male",
+      "performance": "Good",
+      "interest": [
+        {
+          "value": "drawing",
+          "label": "Drawing"
+        }
+      ],
+      "advicestudent": "<p>Try To Improve</p>",
+      "id": "IW21GS0"
+    },
+    {
+      "studentname": "tom",
+      "age": "45",
+      "gender": "Male",
+      "favsubject": "History",
+      "interest": [
+        {
+          "value": "drawing",
+          "label": "Drawing"
+        }
+      ],
+      "performance": "Bad",
+      "advicestudent": "<p>oii</p>",
+      "id": "CtbtS_6"
+    },
+    {
+      "studentname": "Sayan Dutta",
+      "age": "29",
+      "favsubject": "English",
+      "gender": "Female",
+      "performance": "Good",
+      "interest": [
+        {
+          "value": "singing",
+          "label": "Singing"
+        },
+        {
+          "value": "swimming",
+          "label": "Swimming"
+        }
+      ],
+      "advicestudent": "<p>Hiii</p>",
+      "status": true,
+      "id": "gBxnKJW"
+    },
+    {
+      "studentname": "Paulghh",
+      "age": "25",
+      "favsubject": "Geography",
+      "gender": "Male",
+      "performance": "Good",
+      "interest": [
+        {
+          "value": "singing",
+          "label": "Singing"
+        },
+        {
+          "value": "swimming",
+          "label": "Swimming"
+        }
+      ],
+      "advicestudent": "<p>Good </p>",
+      "status": true,
+      "id": "r_c_DM_"
     }
   ]
 }
